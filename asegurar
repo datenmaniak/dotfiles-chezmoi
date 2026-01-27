@@ -1,0 +1,6 @@
+# Quitar las llaves privadas del seguimiento de chezmoi
+chezmoi forget workstation.setup/encrypted_literal_private_keys.asc.asc
+chezmoi forget dot_ssh/encrypted_private_authorized_keys.asc
+
+# Si ya no quieres la pública en GitHub (opcional pero recomendado por ahora)
+chezmoi forget workstation.setup/public_key.asc

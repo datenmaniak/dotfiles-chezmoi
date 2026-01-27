@@ -1,0 +1,7 @@
+# Entra a la carpeta de origen de chezmoi
+echo "chezmoi cd"
+
+# Borra los archivos sensibles físicamente de esa carpeta
+rm workstation.setup/encrypted_literal_private_keys.asc.asc
+rm workstation.setup/public_key.asc
+rm dot_ssh/encrypted_private_authorized_keys.asc

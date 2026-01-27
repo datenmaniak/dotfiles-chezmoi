@@ -1,0 +1,3 @@
+# Ignorar backups y archivos temporales
+*.swp
+.DS_Store

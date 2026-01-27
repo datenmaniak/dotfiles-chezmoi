@@ -1,0 +1,47 @@
+# ========================================
+# .zshrc - COMPLETADO TAB FUNCIONANDO 100%
+# ========================================
+
+# 1. PATH PRIMERO
+export PATH="$HOME/.bin:$HOME/.local/bin:$PATH"
+
+# 2. HISTORIAL
+HISTFILE=~/.zsh_history
+HISTSIZE=20000 SAVEHIST=20000
+setopt HIST_IGNORE_DUPS SHARE_HISTORY INC_APPEND_HISTORY
+
+# 3. COMPINIT ANTES DE TODO (CRÍTICO)
+autoload -Uz compinit
+compinit -d ~/.zcompdump
+zstyle ':completion:*' menu select
+zstyle ':completion:*' rehash true
+
+
+# 🎯 ESTA LÍNEA HACE QUE FUNCIONEN DOTFILES
+_comp_options+=(globdots)
+
+
+# 4. TERMINAL
+export TERM='xterm-256color'
+autoload -U colors && colors
+
+# 5. EDITOR
+export EDITOR=nvim
+
+# 6. ALIASES BÁSICOS (sin funciones complejas aún)
+alias v=nvim g=git
+
+# 7. COMPLETADO PARA ALIASES (IMPORTANTE)
+setopt COMPLETE_ALIASES
+
+# 8. STARSHIP DESPUÉS DE COMPINIT (CRÍTICO)
+eval "$(starship init zsh)"
+
+# 9. bling.sh DESPUÉS (Kinoite)
+[[ -f /usr/share/ublue-os/bling/bling.sh ]] && source /usr/share/ublue-os/bling/bling.sh
+
+# 10. TMUX AL FINAL
+#if command -v tmux &>/dev/null && [[ -z $TMUX && $TERM != *screen* ]]; then
+#  tmux attach -t main || tmux new -s main
+#fi
+

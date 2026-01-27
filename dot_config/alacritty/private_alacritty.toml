@@ -1,0 +1,67 @@
+# ~/.config/alacritty/alacritty.toml
+# OPTIMIZADO para .zshrc reciente + Fedora Kinoite 2026
+
+[window]
+padding = { x = 10, y = 10 }
+dynamic_padding = true
+decorations = "Full"
+#decorations = "Buttonless"
+opacity = 0.95
+startup_mode = "Maximized"
+
+[font]
+# ✅ Nerd Font para Starship + bling.sh icons
+normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
+bold = { family = "JetBrainsMono Nerd Font", style = "Bold" }
+italic = { family = "JetBrainsMono Nerd Font", style = "Italic" }
+size = 13.2850
+
+# 🎯 CRÍTICO: Fixea Zsh Tab completion + Tmux
+[env]
+TERM = "xterm-256color"
+
+# Keybindings para tu workflow DevOps/PHP
+[keyboard]
+bindings = [
+   # 🚪 CERRAR VENTANA COMPLETA (más importante)
+  { key = "Q", mods = "Control|Shift", action = "Quit" },
+
+  # 🔄 COPIAR/PEGAR NATURAL (Ctrl+C/V como otras apps) 
+  { key = "C", mods = "Control|Shift", action = "Copy" },
+  { key = "V", mods = "Control|Shift", action = "Paste" },
+]
+
+# Logs largos (Podman/Laravel)
+[scrolling]
+history = 10000
+multiplier = 3
+
+# Tus colores GitHub Dark (perfectos)
+[colors.primary]
+background = "#0d1117"
+foreground = "#c9d1d9"
+bright_foreground = "#f0f6fc"
+
+[colors.normal]
+black = "#0d1117"
+red = "#ff7b72"
+green = "#7ee787"
+yellow = "#d29922"
+blue = "#58a6ff"
+magenta = "#d2a8ff"
+cyan = "#39c5cf"
+white = "#c9d1d9"
+
+[colors.bright]
+black = "#484f58"
+red = "#ff7b72"
+green = "#7ee787"
+yellow = "#d29922"
+blue = "#58a6ff"
+magenta = "#bc8cff"
+cyan = "#39c5cf"
+white = "#f0f6fc"
+
+[terminal.shell]
+program = "/bin/tmux"                    # ← Alacritty llama tmux
+args = ["new-session", "-A", "-s", "main"] # ← Crea/une sesión main
