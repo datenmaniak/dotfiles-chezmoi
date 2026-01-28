@@ -1,0 +1,87 @@
+# Estilo base del prompt
+format = """
+[🐧](bold green)$battery$directory$git_branch$git_status$nodejs$package
+$character
+"""
+
+[custom.min_path]
+command = "echo $STARSHIP_MIN_PATH"
+style = "bold purple"
+format = "📁 [$output]($style) "
+
+[custom.dir_segments]
+command = "echo $STARSHIP_DIR_SEGMENTS"
+style = "bold purple"
+format = "📁 [$output]($style) "
+
+
+#$custom.battery_alert
+
+# Símbolo de entrada
+[character]
+success_symbol = "[➜](bold #7700F0)"
+error_symbol = "[✗](bold red)"
+vicmd_symbol = "[V](bold green)"
+
+# Directorio actual
+[directory]
+# style = "bold purple"
+truncation_length = 2
+truncate_to_repo = true
+style = "bold green"
+format = "[$path]($style) "
+truncation_symbol = '…/'
+
+# Git branch
+[git_branch]
+symbol = "🌿 "
+style = "bold #7700F0"
+
+# Git status
+[git_status]
+style = "bold purple"
+conflicted = "⚔️ "
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+untracked = "🌀 "
+stashed = "📦 "
+modified = "🛠️ "
+staged = "🟩 "
+renamed = "🔀 "
+deleted = "🗑️ "
+
+# Node.js
+[nodejs]
+symbol = "🟢 "
+style = "bold green"
+
+# Package (NPM)
+[package]
+symbol = "📦 "
+style = "bold yellow"
+
+# Batería
+[battery]
+full_symbol = "🔋"
+charging_symbol = "⚡"
+discharging_symbol = "🔻"
+
+
+[[battery.display]]
+threshold = 15
+style = "bold red"
+discharging_symbol = "🪫"
+charging_symbol = "🪫"
+
+[[battery.display]]
+threshold = 100
+style = "bold #7700F0"
+
+# Alerta visual si batería baja
+# [custom.battery_alert]
+# command = "echo '🐧'"
+# # when = "env.STARSHIP_BATTERY_ALERT == 'low'"
+# style = "bold red"
+# format = "$output"
+
