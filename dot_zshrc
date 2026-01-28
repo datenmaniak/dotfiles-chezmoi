@@ -45,3 +45,7 @@ eval "$(starship init zsh)"
 #  tmux attach -t main || tmux new -s main
 #fi
 
+
+# Para que GPG sepa en qué terminal estás trabajando exactamente
+export GPG_TTY=$(tty)
+
