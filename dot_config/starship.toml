@@ -1,8 +1,16 @@
 # Estilo base del prompt
 format = """
-[🐧](bold green)$battery$directory$git_branch$git_status$nodejs$package
+[🐧](bold green)$battery$hostname$directory$git_branch$git_status$nodejs$package
 $character
 """
+
+
+[hostname]
+ssh_only = false
+format = "[$hostname]($style) " # El espacio al final ayuda a la legibilidad
+style = "bold dimmed white"      # Puedes cambiar el color aquí
+disabled = false                 # Asegúrate de que no esté desactivado
+
 
 [custom.min_path]
 command = "echo $STARSHIP_MIN_PATH"
