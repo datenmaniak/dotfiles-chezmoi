@@ -1,0 +1,411 @@
+#!/usr/bin/env python3
+"""
+BACKUP v3.2 - CORREGIDO
+USO: ./backup.py -s | -l | -b DESTINO | -i
+"""
+
+import os
+import sys
+import argparse
+import shutil
+import tarfile
+import subprocess
+import json
+from datetime import datetime
+
+
+# ============================================================================
+# FUNCIONES ignore.json
+# ============================================================================
+def get_ignore_file():
+    return os.path.join(os.path.expanduser("~/.bin"), "ignore.json")
+
+
+def load_ignore_list():
+    ignore_file = get_ignore_file()
+    if os.path.exists(ignore_file):
+        try:
+            with open(ignore_file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                patterns = data.get("excludes", [])
+                print(f"📋 {len(patterns)} exclusiones cargadas")
+                return patterns
+        except Exception as e:
+            print(f"⚠️ Error ignore.json: {e}")
+    return []
+
+
+def list_ignores():
+    patterns = load_ignore_list()
+    print("\n📋 EXCLUSIONES (ignore.json):")
+    if patterns:
+        for i, pattern in enumerate(patterns, 1):
+            print(f"  {i:2d}. {pattern}")
+    else:
+        print("  Ninguna exclusión configurada")
+    print(f"\n📁 {get_ignore_file()}")
+
+
+def should_ignore(path, ignore_patterns):
+    current_path = str(path)
+    while len(current_path) > 1:
+        path_base = os.path.basename(current_path)
+        for pattern in ignore_patterns:
+            if (
+                pattern == path_base
+                or path_base.endswith(pattern)
+                or pattern in path_base
+            ):
+                return True
+        current_path = os.path.dirname(current_path)
+    return False
+
+
+# ============================================================================
+# FUNCIONES PRINCIPALES
+# ============================================================================
+def get_size_mb_gb(path):
+    total = 0
+    try:
+        for dirpath, _, filenames in os.walk(path):
+            for filename in filenames:
+                file_path = os.path.join(dirpath, filename)
+                if os.path.exists(file_path) and os.path.isfile(file_path):
+                    total += os.path.getsize(file_path)
+    except:
+        return "N/A"
+
+    if total > 1024**3:
+        return f"{total/1024**3:.1f}G"
+    elif total > 1024**2:
+        return f"{total/1024**2:.1f}M"
+    else:
+        return f"{total/1024:.1f}K"
+
+
+def stat_mode():
+    # home = os.path.expanduser("~")
+    origen = os.getcwd()
+    home = os.path.expanduser(origen)
+    print("📊 ESTADÍSTICAS")
+
+    print("\n📁 $HOME:")
+    dirs_home = []
+    try:
+        for item in os.listdir(home):
+            path = os.path.join(home, item)
+            if os.path.isdir(path) and not item.startswith("."):
+                dirs_home.append((item, path))
+        dirs_home.sort(key=lambda x: get_size_mb_gb(x[1]), reverse=True)
+        for name, path in dirs_home:
+            print(f"  {name:12}: {get_size_mb_gb(path)}")
+    except Exception as e:
+        print(f"  Error: {e}")
+
+    print("\n💾 Discos:")
+    try:
+        result = subprocess.run(["df", "-hT"], capture_output=True, text=True)
+        for line in result.stdout.split("\n")[1:]:
+            if any(x in line for x in ["ntfs", "exfat", "sda", "sdb", "nvme"]):
+                print(f"  {line.strip()}")
+    except:
+        print("  No disponible")
+
+    print(f"\n🏠 $HOME total: {get_size_mb_gb(home)}")
+
+
+def list_mode(apply_ignore):
+    # home = os.path.expanduser("~")
+    origen = os.getcwd()
+    home = os.path.expanduser(origen)
+    patterns = load_ignore_list() if apply_ignore else []
+
+    print(f"\n📋 $HOME:")
+    if apply_ignore:
+        print("  (con exclusiones)")
+
+    dotfiles = []
+    try:
+        for item in sorted(os.listdir(home)):
+            path = os.path.join(home, item)
+            if should_ignore(path, patterns):
+                print(f"  ⏭️  {item}")
+                continue
+            if os.path.isdir(path):
+                if item.startswith("."):
+                    dotfiles.append(item)
+                else:
+                    print(f"  📂 {item}")
+        if dotfiles:
+            print("\n🔗 Dotfiles:")
+            for df in sorted(dotfiles):
+                print(f"  📁 {df}")
+    except Exception as e:
+        print(f"❌ {e}")
+
+
+def create_backup_name(destino):
+    origen = os.getcwd()
+    # hostname = os.uname().nodename
+    hostname = "Victus"
+    # user = 'dk'
+    user = os.getenv("USER", "unknown")
+    fecha = datetime.now().strftime("%Y%m%d_%H%M%S")
+    origen_name = os.path.basename(origen.rstrip("/"))
+    return os.path.join(destino, f"{hostname}_{user}_{origen_name}_{fecha}")
+
+
+# def backup_mode(destino, apply_ignore):
+#    """✅ CORREGIDO: destino=str, apply_ignore=bool"""
+#    #home = os.path.expanduser("~")
+#    actual_dir  = os.getcwd()
+#    #origen  = os.getcwd()
+#    origen = os.path.expanduser(actual_dir)
+#    patterns = load_ignore_list() if apply_ignore else []
+#    backup_dir = create_backup_name(destino)  # ✅ destino es string
+#
+#    print(f"🚀 Respaldo de  → {origen}")
+#    print(f"🚀 Destino:   → {backup_dir}")
+#    if apply_ignore:
+#        print("  (con exclusiones de: ignore.json)")
+#
+#    os.makedirs(backup_dir, exist_ok=True)
+#
+#    # Dotfiles
+#    dot_dir = os.path.join(backup_dir, "dotfiles")
+#    os.makedirs(dot_dir, exist_ok=True)
+#    print("📄 Archivos normales y directorios:")
+#
+#    total_items = len([f for f in os.listdir(origen) if not f.startswith('.')])
+#    normal_count = 0
+#    current_item = 0
+#    dotfile_count = 0
+#
+#    for item in os.listdir(origen):
+#        src = os.path.join(origen, item)
+#        if not item.startswith("."):
+#            current_item += 1
+#            print(f"[{current_item}/{total_items}] ", end='')
+#
+#            if should_ignore(src, patterns):
+#                print(f"  ⏭️  {item}")
+#                continue
+#
+#            dst = os.path.join(dot_dir, item)
+#            try:
+#                if os.path.isdir(src):
+#                    shutil.copytree(src, dst, dirs_exist_ok=True)
+#                    print(f" {item}/")
+#                else:
+#                    shutil.copy2(src, dst)
+#                    print(f"  📁 {item}")
+#                    dotfile_count += 1
+#            except Exception as e:
+#                print(f"  ❌ {item}: {e}")
+#
+#    # Tar.gz
+#    print("\n📦 Comprimidos:")
+#    normal_count = 0
+#    for item in os.listdir(origen):
+#        src = os.path.join(origen, item)
+#        if not item.startswith("."):       # archivos  y directorios
+#            if should_ignore(src, patterns):
+#                print(f"  ⏭️  {item}")
+#                continue
+#
+#            if os.path.isdir(src):
+#                    # Directorios -> .tar.gz
+#                tar_name = os.path.join(backup_dir, f"{item}.tar.gz")
+#            try:
+#                with tarfile.open(tar_name, "w:gz") as tar:
+#                    tar.add(src, arcname=item)
+#                print(f"  📦 {item}.tar.gz")
+#                normal_count += 1
+#            except Exception as e:
+#                print(f"  ❌ {item}: {e}")
+#            else:
+#                # Archivos -> copia directa
+#                file_dst = os.path.join(backup_dir, item)
+#                try:
+#                    shutil.copy2(src, file_dst)
+#                    print(f"  {item}")
+#                    normal_count += 1
+#                except Exception as e:
+#                    print(f" X {item}: {e}")
+#
+#
+#    print(f"\n✅ Respaldo completado!")
+#    print(f" {backup_dir}")
+#    print(f" {dotfile_count}  dotfiles + {normal_count} normales ")
+#    print(f"\n✅ Listo: {backup_dir}")
+
+
+def backup_mode(destino, apply_ignore):
+    """
+    ETAPA 1: Inicialización y configuración
+    - Valida directorio origen
+    - Carga exclusiones de ignore.json si aplica
+    - Crea nombre único del respaldo
+    """
+    origen = os.getcwd()
+    patterns = load_ignore_list() if apply_ignore else []
+    backup_dir = create_backup_name(destino)
+
+    print(f"🚀 Respaldando: {origen}")
+    print(f"📁 Destino: {backup_dir}")
+    if apply_ignore:
+        print("   (con exclusiones de ignore.json)")
+
+    # ETAPA 2: Crear estructura base del respaldo
+    os.makedirs(backup_dir, exist_ok=True)
+
+    # ========================================
+    # ETAPA 3: DOTFILES (sin compresión)
+    # ========================================
+    """
+    ETAPA 3: Copia dotfiles a subdirectorio 'dotfiles/'
+    - Archivos/dirs que empiezan con '.'
+    - Copia recursiva preservando estructura
+    - Ignora exclusiones de ignore.json
+    """
+    dotfiles_dir = os.path.join(backup_dir, "dotfiles")
+    os.makedirs(dotfiles_dir, exist_ok=True)
+
+    print("\n📄 ETAPA 3/3 - DOTFILES:")
+    dotfile_count = 0
+    for item in os.listdir(origen):
+        src = os.path.join(origen, item)
+        if item.startswith("."):  # Solo dotfiles
+            if should_ignore(src, patterns):
+                print(f"  ⏭️  {item}")
+                continue
+
+            dst = os.path.join(dotfiles_dir, item)
+            try:
+                if os.path.isdir(src):
+                    shutil.copytree(src, dst, dirs_exist_ok=True)
+                    print(f"  📁 {item}/")
+                else:
+                    shutil.copy2(src, dst)
+                    print(f"  📄 {item}")
+                dotfile_count += 1
+            except Exception as e:
+                print(f"  ❌ {item}: {e}")
+
+    # ========================================
+    # ETAPA 4: ARCHIVOS Y DIRECTORIOS NORMALES
+    # ========================================
+    """
+    ETAPA 4: Archivos sueltos + Directorios comprimidos
+    - Archivos → copia directa (.md, .json, .yaml)
+    - Directorios → .tar.gz comprimidos
+    - Barra de progreso [X/N]
+    - Respeta exclusiones ignore.json
+    """
+    print("\n📦 ETAPA 4/4 - ARCHIVOS Y DIRECTORIOS:")
+
+    # Contador de progreso
+    normal_items = [f for f in os.listdir(origen) if not f.startswith(".")]
+    total_items = len(normal_items)
+    current_item = 0
+
+    normal_count = 0
+    for item in normal_items:  # Solo items no-dotfiles
+        src = os.path.join(origen, item)
+        current_item += 1
+
+        # Mostrar progreso
+        print(f"  [{current_item:2d}/{total_items}] ", end="")
+
+        # Verificar exclusiones
+        if should_ignore(src, patterns):
+            print(f"⏭️  {item}")
+            continue
+
+        if os.path.isdir(src):
+            # DIRECTORIOS → Comprimir en .tar.gz
+            tar_name = os.path.join(backup_dir, f"{item}.tar.gz")
+            try:
+                with tarfile.open(tar_name, "w:gz") as tar:
+                    tar.add(src, arcname=item)
+                print(f"📦 {item}.tar.gz")
+                normal_count += 1
+            except Exception as e:
+                print(f"❌ {item}")
+        else:
+            # ARCHIVOS SUELTOS → Copia directa
+            file_dst = os.path.join(backup_dir, item)
+            try:
+                shutil.copy2(src, file_dst)
+                print(f"📄 {item}")
+                normal_count += 1
+            except Exception as e:
+                print(f"❌ {item}")
+
+    # ========================================
+    # ETAPA 5: RESUMEN FINAL
+    # ========================================
+    """
+    ETAPA 5: Reporte final con estadísticas
+    - Total dotfiles respaldados
+    - Total archivos/directorios normales
+    - Ruta completa del respaldo
+    """
+    print(f"\n{'='*50}")
+    print(f"✅ RESPALDO COMPLETADO!")
+    print(f"📁 {backup_dir}")
+    print(f"📊 {dotfile_count:2d} dotfiles + {normal_count:2d} normales")
+    print(f"⏩ {total_items - normal_count} excluidos/errores")
+    print(f"{'='*50}")
+
+
+# ============================================================================
+# ✅ MAIN CORREGIDO
+# ============================================================================
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        add_help=False,
+        description="""
+USO: ./backup.py ORIGEN [OPCIÓN] [DESTINO]
+  -s               Estadísticas
+  -l               Listar  
+  -i               Exclusiones
+  -b DESTINO       Backup → DESTINO
+  --ignore         Aplica exclusiones
+        """,
+    )
+
+    # parser.add_argument("origen", nargs="?", default="os.getcwd()")
+    parser.add_argument("destino", nargs="?", default=None)
+    parser.add_argument("-s", "--stat", action="store_true")
+    parser.add_argument("-l", "--list", action="store_true")
+    parser.add_argument("-b", "--backup", action="store_true")
+    parser.add_argument("-i", "--ignores", action="store_true")
+    parser.add_argument("--ignore", action="store_true")
+    parser.add_argument("-h", "--help", action="store_true")
+
+    args = parser.parse_args()
+
+    if len(sys.argv) == 1:
+        parser.print_help()
+        sys.exit(0)
+
+    # ✅ CORREGIDO: Llamadas correctas
+    if args.help:
+        parser.print_help()
+    if args.ignores:
+        list_ignores()
+    elif args.stat:
+        stat_mode()
+    elif args.list:
+        list_mode(args.ignore)
+    elif args.backup:
+        if not args.destino:
+            print("❌ USO: ORIGEN -b DESTINO")
+            sys.exit(1)
+
+        backup_mode(args.destino, args.ignore)  # ✅ destino=string, ignore=bool
+        # backup_mode(args.origen, args.destino, args.ignore)  # ✅ destino=string, ignore=bool
+    else:
+        print("❌ Opción inválida")
+        sys.exit(1)
