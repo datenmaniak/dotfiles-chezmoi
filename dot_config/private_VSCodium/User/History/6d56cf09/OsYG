@@ -1,0 +1,28 @@
+FROM fedora:latest
+#ENV DEBIAN_FRONTEND=noninteractive
+
+# Copia ubuntu.sources desde pkg/ (relativo al contexto containers/)
+#COPY ubuntu.sources /etc/apt/sources.list.d/ubuntu.sources
+
+
+RUN dnf update
+
+#&& apt-get install -y sudo git wget bc curl vim nano  iproute2 iputils-ping \
+&& rm -rf /var/lib/apt/lists/*
+
+RUN useradd -ms /bin/bash willians && \
+    echo "willians ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
+    mkdir -p /home/willians/laravel /home/willians/pkg  && \
+    mkdir -p /home/willians/legacy
+
+
+RUN chown -R willians:willians 
+# && /home/willians/.bashrc  \
+# && chown -R willians:willians /home/willians/.config
+
+
+USER willians
+
+WORKDIR /home/willians
+CMD ["bash"]
+

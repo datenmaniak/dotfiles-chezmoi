@@ -1,0 +1,1 @@
+rpm-ostree install libatomic alacritty  tmux zsh gcc gnupg2 

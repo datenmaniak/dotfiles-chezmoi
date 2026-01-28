@@ -1,0 +1,113 @@
+[tools]
+podman = "5"
+
+
+[env]
+WORKDIR="/home/willians/containers/db"
+MAIN="/home/willians/containers"
+IMAGE="mariadb"
+CONTAINER="dbase"
+
+
+
+
+# === TUS SCRIPTS CONVERTIDOS ===
+[tasks.build]
+description = "Build MariaDB con dotfiles sincronizados (tu build.sh)"
+run = """
+ 
+    echo "Procesando en $WORKDIR/"
+    podman rmi --force mariadb || true
+  
+    mkdir -p "$WORKDIR/dotfiles" "$MAIN/pkg" "$WORKDIR/mysql-data" "$WORKDIR/backup"
+  
+  # TUS rsync EXACTOS
+  rsync -av ~/.bashrc "$WORKDIR/dotfiles/bashrc/"
+  rsync -av ~/.ssh "$WORKDIR/dotfiles/ssh/"
+  rsync -av ~/.config/starship.toml "$WORKDIR/dotfiles/config/"
+  
+  podman build -t mariadb -f "$WORKDIR/init/Dockerfile-root" 
+  
+  echo "✅ mariadb: imagen  construida."
+"""
+
+[tasks.run]
+description = "Ejecuta MariaDB container con volúmenes persistentes"
+run = """
+
+  
+  podman rm dbase -f|| true
+  
+  echo "Ajustar permisos en mapeo mysql data"
+  sudo chown -R root:root "$WORKDIR/mysql-data"
+  sudo chmod -R 755 "$WORKDIR/mysql-data"
+  
+  podman run -d --user root:root \
+    --name dbase \
+    -p 3306:3306 \
+   --network "$NETWORK" \
+  -v "$MAIN/pkg:/root/pkg:Z" \
+  -v "$SOURCE/staging:/var/lib/mysql:Z" \
+  -v "$HOME/Dev/proyectos:/root/legacy:Z" \
+  -v "$MAIN/Laravel/projects:/root/Laravel:Z" \
+  -v "$SOURCE/bak:/root/backup:Z" \
+  -v "$SOURCE/dotfiles/bashrc/.bashrc:/root/.bashrc:Z" \
+  -v "$SOURCE/dotfiles/ssh/.ssh:/root/.ssh:ro,Z" \
+  -v "$SOURCE/dotfiles/config:/root/.config/:Z" \
+  -e "MARIADB_ROOT_PASSWORD=$DB_ROOT_PASS" \
+  --restart always \
+  mariadb-dk
+    
+  echo "🚀 MariaDB en localhost:3306"
+  echo "📁 SQL: $WORKDIR/mysql-data"
+  echo "💾 Backups: $WORKDIR/backup"
+  
+
+  
+"""
+
+[tasks.deploy]
+description = "Build + Run completo (producción)"
+run = "{{ tasks.build.run }} && sleep 5 && {{ tasks.run.run }}"
+
+[tasks.stop]
+description = "Detiene el contenedor MariaDB"
+run = """
+    podman stop dbms
+    
+"""
+
+[tasks.start]
+description = "Inicia contenedor MariaDB"
+run = """
+    podman start dbms
+    echo "✅ MariaDB iniciada (localhost:3306)"
+"""
+
+
+[tasks.exec]
+description = "Entra a MariaDB (bash interactivo)"
+run = """
+  podman exec -it dbms bash
+"""
+
+[tasks.exec-mysql]
+description = "Entra directo a MySQL/MariaDB"
+run = """
+  podman exec -it dbms mysql -uadmin -padmin123
+"""
+
+[tasks.restart]
+description = "Reinicia MariaDB inteligentemente"
+run = """
+  podman restart dbms
+  echo "🔄 MariaDB reiniciada"
+"""
+
+[tasks.logs]
+description = "Logs MariaDB"
+run = """
+    podman logs -f dbase
+
+"""
+

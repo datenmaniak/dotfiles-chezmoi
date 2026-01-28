@@ -1,0 +1,114 @@
+[tools]
+podman = "5"
+
+
+[env]
+WORKDIR="/home/willians/containers/db"
+MAIN="/home/willians/containers"
+IMAGE="mariadb"
+CONTAINER="dbase"
+
+
+
+
+
+# === TUS SCRIPTS CONVERTIDOS ===
+[tasks.build]
+description = "Build MariaDB con dotfiles sincronizados (tu build.sh)"
+run = """
+ 
+    echo "Procesando en /home/willians/containers/db/"
+    podman rmi --force mariadb || true
+  
+    mkdir -p "/home/willians/containers/db/dotfiles" "$MAIN/pkg" "/home/willians/containers/db/mysql-data" "/home/willians/containers/db/backup"
+  
+  # TUS rsync EXACTOS
+  rsync -av ~/.bashrc "/home/willians/containers/db/dotfiles/bashrc/"
+  rsync -av ~/.ssh "/home/willians/containers/db/dotfiles/ssh/"
+  rsync -av ~/.config/starship.toml "/home/willians/containers/db/dotfiles/config/"
+  
+  podman build -t mariadb -f "/home/willians/containers/db/init/Dockerfile-root" 
+  
+  echo "✅ mariadb: imagen  construida."
+"""
+
+[tasks.run]
+description = "Ejecuta MariaDB container con volúmenes persistentes"
+run = """
+
+  
+  podman rm dbase -f|| true
+  
+  echo "Ajustar permisos en mapeo mysql data"
+  sudo chown -R root:root "/home/willians/containers/db/mysql-data"
+  sudo chmod -R 755 "/home/willians/containers/db/mysql-data"
+  
+  podman run -d --user root:root \
+    --name dbase \
+    -p 3306:3306 \
+   --network "$NETWORK" \
+  -v "$MAIN/pkg:/root/pkg:Z" \
+  -v "/home/willians/containers/db/mysql-data:/var/lib/mysql:Z" \
+  -v "$HOME/Dev/proyectos:/root/legacy:Z" \
+  -v "$MAIN/Laravel/projects:/root/Laravel:Z" \
+  -v "/home/willians/containers/db/backup:/root/backup:Z" \
+  -v "/home/willians/containers/db/dotfiles/bashrc/.bashrc:/root/.bashrc:Z" \
+  -v "/home/willians/containers/db/dotfiles/ssh/.ssh:/root/.ssh:ro,Z" \
+  -v "/home/willians/containers/db/dotfiles/config:/root/.config/:Z" \
+  -e "MARIADB_ROOT_PASSWORD=admin123" \
+  --restart always \
+  $IMAGE
+    
+  echo "🚀 MariaDB en localhost:3306"
+  echo "📁 SQL: /home/willians/containers/db/mysql-data"
+  echo "💾 Backups: /home/willians/containers/db/backup"
+  
+
+  
+"""
+
+[tasks.deploy]
+description = "Build + Run completo (producción)"
+run = "{{ tasks.build.run }} && sleep 5 && {{ tasks.run.run }}"
+
+[tasks.stop]
+description = "Detiene el contenedor MariaDB"
+run = """
+    podman stop $CONTAINER
+    
+"""
+
+[tasks.start]
+description = "Inicia contenedor MariaDB"
+run = """
+    podman start dbase
+    echo "✅ MariaDB iniciada (localhost:3306)"
+"""
+
+
+[tasks.exec]
+description = "Entra a MariaDB (bash interactivo)"
+run = """
+  podman exec -it dbase bash
+"""
+
+[tasks.exec-mysql]
+description = "Entra directo a MySQL/MariaDB"
+run = """
+  podman exec -it dbase mysql -uadmin -padmin123
+"""
+
+[tasks.restart]
+description = "Reinicia MariaDB inteligentemente"
+run = """
+  podman restart dbase
+  echo "🔄 MariaDB reiniciada"
+"""
+
+[tasks.logs]
+description = "Logs MariaDB"
+run = """
+    podman logs -f dbase
+
+"""
+
