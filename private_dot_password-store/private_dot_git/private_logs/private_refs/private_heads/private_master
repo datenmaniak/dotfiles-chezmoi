@@ -1,0 +1,8 @@
+0000000000000000000000000000000000000000 615252b936d27b6946285ec2fc2bc560fd812d41 datenmaniak <ppwj@yahoo.com> 1768608447 -0400	commit (initial): Add current contents of password store.
+615252b936d27b6946285ec2fc2bc560fd812d41 1b4947a18bc32da2ff354d4e24caa3c7580a6f7a datenmaniak <ppwj@yahoo.com> 1768608447 -0400	commit: Configure git repository for gpg file diff.
+1b4947a18bc32da2ff354d4e24caa3c7580a6f7a 3be02319c10217ecb56f7096e3c241175d729bfc Willians Patino <ppwj@yahoo.com> 1769624981 -0400	commit: Set GPG id to 29B2CCE0C67D26EF.
+3be02319c10217ecb56f7096e3c241175d729bfc 19c49c279bb0229471012bdb4c658d31299abecc Willians Patino <ppwj@yahoo.com> 1769625037 -0400	commit: Add given password for personal/email to store.
+19c49c279bb0229471012bdb4c658d31299abecc 7b8175016a0e8b7fe159ae15df1f4b03740e705b Willians Patino <ppwj@yahoo.com> 1769625792 -0400	commit: Add given password for repo/github to store.
+7b8175016a0e8b7fe159ae15df1f4b03740e705b 18bd9fb281a88464e6d686adc66afdc53a104e41 Willians Patino <ppwj@yahoo.com> 1769625845 -0400	commit: Add given password for repo/github to store.
+18bd9fb281a88464e6d686adc66afdc53a104e41 93c060009c557aabd03c149396a2bde9ba38c17a Willians Patino <ppwj@yahoo.com> 1769626146 -0400	commit: Add given password for devel/email to store.
+93c060009c557aabd03c149396a2bde9ba38c17a 9e656bea172013bec0a8e35c59b103e9168d7232 Willians Patino <ppwj@yahoo.com> 1769626238 -0400	commit: Add given password for devel/email to store.
