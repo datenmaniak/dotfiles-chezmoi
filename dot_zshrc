@@ -49,3 +49,6 @@ eval "$(starship init zsh)"
 # Para que GPG sepa en qué terminal estás trabajando exactamente
 export GPG_TTY=$(tty)
 
+alias ll='ls -l'
+alias la='ls -la'
+alias l='ls -h'
