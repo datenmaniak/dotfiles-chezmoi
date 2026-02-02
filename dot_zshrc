@@ -52,3 +52,6 @@ export GPG_TTY=$(tty)
 alias ll='ls -l'
 alias la='ls -la'
 alias l='ls -h'
+
+export GPG_TTY=$(tty)
+
