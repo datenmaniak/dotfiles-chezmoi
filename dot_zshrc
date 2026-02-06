@@ -54,4 +54,5 @@ alias la='ls -la'
 alias l='ls -h'
 
 export GPG_TTY=$(tty)
+alias pass='GPG_TTY=$(tty) PINENTRY_USER_DATA="USE_CURSES=1" pass'
 
