@@ -13,16 +13,17 @@ alias pirm='podman image rm -f'                     # 🗑️  Elimina imagen(es
 alias pib='podman build -t '                       # 🏗️  Construye imagen en base al Dockerfile local (pib miapp .)
 
 # --- CONTENEDORES ---
-alias plc='podman ps -a'                             # 📋 Lista TODOS los contenedores
-alias plr='podman ps'                               # ▶️  Lista solo contenedores corriendo
-alias prun='podman run -it --rm'                    # ▶️  Ejecuta interactivo y auto-borra
-alias pstart='podman start -i'                      # ▶️  Inicia contenedor apagado (interactivo, SIN borrar)
-alias pstop='podman stop'                           # ⏹️  Detiene contenedor(es)
-alias prestart='podman restart'                     # 🔄  Reinicia contenedor(es)
-alias prmf='podman rm -f'                           # 🗑️  Elimina contenedor(es) forzando
-alias plog='podman logs -f'                         # 📜  Logs en tiempo real (plog contenedor)
-alias pexec='podman exec -it'                       # 🖥️  Entra a contenedor corriendo
-alias plp='podman port'                             # 🖥️  Listar puertos del contenedor
+alias plc='podman ps -a'                          # 📋 Lista TODOS los contenedores
+alias plr='podman ps'                             # ▶️  Lista solo contenedores corriendo
+alias prur='podman run -it --rm'                  # ▶️  Ejecuta interactivo y auto-borra
+alias prud='podman run -d'                        # ▶️  Ejecuta en background
+alias psta='podman start -i'                      # ▶️  Inicia contenedor apagado (interactivo, SIN borrar)
+alias psto='podman stop'                          # ⏹️  Detiene contenedor(es)
+alias pres='podman restart'                       # 🔄  Reinicia contenedor(es)
+alias prmf='podman rm -f'                         # 🗑️  Elimina contenedor(es) forzando
+alias plog='podman logs -f'                       # 📜  Logs en tiempo real (plog contenedor)
+alias pexe='podman exec -it'                     # 🖥️  Entra a contenedor corriendo
+alias plp='podman port'                           # 🖥️  Listar puertos del contenedor
 
 # --- PODMAN-COMPOSE ---
 alias pcc='podman compose'                          # 🎛️  Compose principal (pdc up/down)
@@ -72,7 +73,8 @@ palias() {
     echo "  plc     → podman ps -a                     - Lista todos los contenedores"
     echo "  plr     → podman ps                        - Listar solo contenedores corriendo"
     echo "  psta    → podman start -i                  - Inicia contenedor apagado"
-    echo "  prun    → podman run -it --rm              - Crear nuevo contenedor + auto-borra al salir"
+    echo "  prur    → podman run -it --rm              - Crear nuevo contenedor + auto-borra al salir"
+    echo "  prud    → podman run -d                    - Crear y ejecuta en background"
     echo "  psto    → podman stop                      - Detiene"
     echo "  prmf    → podman rm -f                     - Elimina contenedor forzadamente"
     echo "  plog    → podman logs -f                   - Logs en tiempo real"
