@@ -1,0 +1,109 @@
+
+# ========================================
+# ALIAS PODMAN - IMÁGENES Y CONTENEDORES
+# Para Bluefin/Fedora con Podman rootless
+# ========================================
+
+# --- IMÁGENES ---
+alias pi='podman images'                            # 📋 Lista todas las imágenes locales
+alias pil='podman image list'                       # 📋 Lista imágenes (formato largo)
+alias piu='podman pull'                             # ⬇️  Descarga imagen (piu fedora:39)
+alias pip='podman image prune -f'                   # 🧹 Limpia imágenes no usadas (dangling)
+alias pirm='podman image rm -f'                     # 🗑️  Elimina imagen(es) forzando
+alias pib='podman build -t '                       # 🏗️  Construye imagen en base al Dockerfile local (pib miapp .)
+
+# --- CONTENEDORES ---
+alias plc='podman ps -a'                             # 📋 Lista TODOS los contenedores
+alias plr='podman ps'                               # ▶️  Lista solo contenedores corriendo
+alias prun='podman run -it --rm'                    # ▶️  Ejecuta interactivo y auto-borra
+alias pstart='podman start -i'                      # ▶️  Inicia contenedor apagado (interactivo, SIN borrar)
+alias pstop='podman stop'                           # ⏹️  Detiene contenedor(es)
+alias prestart='podman restart'                     # 🔄  Reinicia contenedor(es)
+alias prmf='podman rm -f'                           # 🗑️  Elimina contenedor(es) forzando
+alias plog='podman logs -f'                         # 📜  Logs en tiempo real (plog contenedor)
+alias pexec='podman exec -it'                       # 🖥️  Entra a contenedor corriendo
+alias plp='podman port'                             # 🖥️  Listar puertos del contenedor
+
+# --- PODMAN-COMPOSE ---
+alias pcc='podman compose'                          # 🎛️  Compose principal (pdc up/down)
+alias pcud='podman compose up -d'                   # 🚀 Levanta servicios en background
+alias pcudv='podman compose down -v'                 # 💥 Detiene y borra volúmenes
+alias pcd='podman compose down '                 # 💥 Detiene y borra volúmenes
+alias pcl='podman compose logs -f'                 # 📜 Logs de todos los servicios
+
+# --- DISTROBOX ---
+alias dbls='distrobox list -e'                        # 📋 Lista distrobox exportados
+alias dbcr='distrobox create --image'                # 🆕 Crea distrobox (dbc fedora:39)
+alias dben='distrobox enter'                         # 🖥️  Entra a distrobox
+alias dbxp='distrobox-export --app'                  # 📦 Exporta app del contenedor
+alias dbrm='distrobox rm -f'                        # 🗑️  Elimina distrobox
+
+# --- UTILIDADES ---
+alias pclean='podman rm -f -a && podman image prune -a -f'  # 🧹 Limpieza total
+alias pvol='podman volume ls'                       # 📦 Lista volúmenes
+alias pnl='podman network ls'                        # 🌐 Lista redes
+alias psi='podman system info'                      # ℹ️  Info completa del sistema Podman
+
+# === USO RÁPIDO ===
+# plc                # Ver contenedores
+# pi                # Ver imágenes  
+# pstart mi-contenedor  # ← NUEVO: Iniciar contenedor apagado
+# prun fedora:39    # Probar imagen nueva
+# pcud              # Levantar compose
+# dbls                # Ver distrobox
+
+# ========================================
+# AYUDA RÁPIDA - ALIAS PODMAN Y DISTROBOX
+# Copia al final de ~/.zsh_aliases
+# ========================================
+
+# --- FUNCIÓN DE AYUDA ---
+palias() {
+    echo "🚀 ALIAS PODMAN Y DISTROBOX DISPONIBLES\n"
+    echo "📋 IMÁGENES:"
+    echo "  pi      → podman images                   = Lista imágenes"
+    echo "  piu     → podman pull                     = Descargar imagen (podman pull fedora:39)"
+    echo "  pip     → podman image prune -f           = Limpia no usadas"
+    echo "  pirm    → podman image rm -f              = Elimina imagen"
+    echo "  pib     → podman build -t                = Construye imagen en base el Dockerfile local"
+    
+    echo -e "\n▶️  CONTENEDORES:"
+    echo "  plc     → podman ps -a                     - Lista todos los contenedores"
+    echo "  plr     → podman ps                        - Listar solo contenedores corriendo"
+    echo "  psta    → podman start -i                  - Inicia contenedor apagado"
+    echo "  prun    → podman run -it --rm              - Crear nuevo contenedor + auto-borra al salir"
+    echo "  psto    → podman stop                      - Detiene"
+    echo "  prmf    → podman rm -f                     - Elimina contenedor forzadamente"
+    echo "  plog    → podman logs -f                   - Logs en tiempo real"
+    echo "  prmf    → podman rm -f                     - Elimina contenedor forzadamente"
+    echo "  pexe    → podman exec -it                  - Entrar en el contenedor que ya está corriendo"
+    echo "  plp     → podman port                      - Listar puerto del contenedor"
+    
+    echo -e "\n🎛️  COMPOSE:"
+    echo "  pcu     → podman compose                 + Podman compose"
+    echo "  pcud    → podman compose up -d           + Iniciar compose en el background"
+    echo "  pcudv   → podman compose down -v         + Detiene composer y borra volúmenes"
+    echo "  pcud    → podman compose down            + Detiene composer sin borrar volúmenes"
+    echo "  pcl     → podman compose logs -f         + Podman Compose Logs"
+    
+    echo -e "\n📦 DISTROBOX:"
+    echo "  dbls     → distrobox list -e                        * Lista de contenedores Distrobox exportados"
+    echo "  dbcr     → distrobox create --image <i> --name <n>  * Crea contenedor Distrobox (distrobox create --name  -i fedora:43) "
+    echo "  dben     → distrobox enter                          * Entra al contenedor Distrobox  (distrobox enter fedora)"
+    echo "  dbxp     → distrobox-export --app                   * Exportar app desde el contenedor Distrobox"
+    echo "  dbrm     → distrobox rm -f                          * Eliminar forzadamente un Distrobox (distrobox rm -f fedora)"
+    
+    echo -e "\n🧹 UTILIDADES:"
+    echo "  pclean  → Limpieza TOTAL contenedores+imágenes     -- Precaución: ELIMINA TODO ::  podman rm -f -a && podman prune -a -f"
+    echo "  plog    → podman logs -f                           -- Podman Logs realtime"
+    echo "  pvol    → podman volume ls                         -- Lista volúmenes"
+    echo "  psi     → podman system info                       -- Info completa del sistema Podman"
+    
+    echo -e "\n❓ USO: 'palias' (esta ayuda)"
+    echo "🎯 TIP: 'plc' para ver contenedores corriendo"
+}
+
+# REGISTRAR LA FUNCIÓN COMO ALIAS CORTITO
+alias pa='palias'
+alias ?='palias'
+

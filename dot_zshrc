@@ -56,3 +56,7 @@ alias l='ls -h'
 export GPG_TTY=$(tty)
 alias pass='GPG_TTY=$(tty) PINENTRY_USER_DATA="USE_CURSES=1" pass'
 
+
+# Cargar alias personalizados
+[[ -f ~/.zsh_aliases ]] && source ~/.zsh_aliases
+
