@@ -39,9 +39,10 @@ alias dbxp='distrobox-export --app'                  # 📦 Exporta app del cont
 alias dbrm='distrobox rm -f'                        # 🗑️  Elimina distrobox
 
 # --- UTILIDADES ---
-alias pclean='podman rm -f -a && podman image prune -a -f'  # 🧹 Limpieza total
-alias pvol='podman volume ls'                       # 📦 Lista volúmenes
-alias pnl='podman network ls'                        # 🌐 Lista redes
+alias pclean='podman rm -f -a && podman image prune -a -f'  - 🧹Limpieza total
+alias pvol='podman volume ls'                               - 📦Lista volúmenes
+alias pnl='podman network ls'                               -   🌐 Lista redes
+alias pni='podman network inspect'                          -   Inspeccionar una red Container
 alias psi='podman system info'                      # ℹ️  Info completa del sistema Podman
 
 # === USO RÁPIDO ===
@@ -94,11 +95,12 @@ palias() {
     echo "  dbrm     → distrobox rm -f                          * Eliminar forzadamente un Distrobox (distrobox rm -f fedora)"
     
     echo -e "\n🧹 UTILIDADES:"
-    echo "  pclean  → Limpieza TOTAL contenedores+imágenes     -- Precaución: ELIMINA TODO ::  podman rm -f -a && podman prune -a -f"
-    echo "  plog    → podman logs -f                           -- Podman Logs realtime"
-    echo "  pvol    → podman volume ls                         -- Lista volúmenes"
-    echo "  psi     → podman system info                       -- Info completa del sistema Podman"
-    
+    echo "  pclean  → Limpieza TOTAL contenedores+imágenes     --  Precaución: ELIMINA TODO ::  podman rm -f -a && podman prune -a -f"
+    echo "  plog    → podman logs -f                           --  Podman Logs realtime"
+    echo "  pvol    → podman volume ls                         --  Lista volúmenes"
+    echo "  psi     → podman system info                       --  Info completa del sistema Podman"
+    echo "  pnl     → podman network list                      --  Listar redes Podman"
+    echo " pni      > podman network inspect                   -   Inspeccionar una red Container"
     echo -e "\n❓ USO: 'palias' (esta ayuda)"
     echo "🎯 TIP: 'plc' para ver contenedores corriendo"
 }
