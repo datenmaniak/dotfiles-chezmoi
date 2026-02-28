@@ -109,5 +109,7 @@ palias() {
 
 # REGISTRAR LA FUNCIÓN COMO ALIAS CORTITO
 alias pa='palias'
-alias ?='palias'
+#alias ?='palias'
 
+# k8s
+alias k=kubectl

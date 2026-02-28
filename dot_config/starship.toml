@@ -27,7 +27,7 @@ format = "📁 [$output]($style) "
 
 # Símbolo de entrada
 [character]
-success_symbol = "[➜](bold #7700F0)"
+#success_symbol = "[➜](bold #7700F0)"
 error_symbol = "[✗](bold red)"
 vicmd_symbol = "[V](bold green)"
 

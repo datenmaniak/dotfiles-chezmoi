@@ -36,31 +36,58 @@ bindings = [
 history = 10000
 multiplier = 3
 
-# Tus colores GitHub Dark (perfectos)
+
+
 [colors.primary]
-background = "#0d1117"
-foreground = "#c9d1d9"
-bright_foreground = "#f0f6fc"
+background = '#2D2A2E'
+foreground = '#FCFCFA'
 
 [colors.normal]
-black = "#0d1117"
-red = "#ff7b72"
-green = "#7ee787"
-yellow = "#d29922"
-blue = "#58a6ff"
-magenta = "#d2a8ff"
-cyan = "#39c5cf"
-white = "#c9d1d9"
+black   = '#403E41'
+red     = '#FF6188'
+green   = '#A9DC76'
+yellow  = '#FFD866'
+blue    = '#FC9867'
+magenta = '#AB9DF2'
+cyan    = '#78DCE8'
+white   = '#FCFCFA'
 
 [colors.bright]
-black = "#484f58"
-red = "#ff7b72"
-green = "#7ee787"
-yellow = "#d29922"
-blue = "#58a6ff"
-magenta = "#bc8cff"
-cyan = "#39c5cf"
-white = "#f0f6fc"
+black   = '#727072'
+red     = '#FF6188'
+green   = '#A9DC76'
+yellow  = '#FFD866'
+blue    = '#FC9867'
+magenta = '#AB9DF2'
+cyan    = '#78DCE8'
+white   = '#FCFCFA'
+
+
+## Tus colores GitHub Dark (perfectos)
+#[colors.primary]
+#background = "#0d1117"
+#foreground = "#c9d1d9"
+#bright_foreground = "#f0f6fc"
+#
+#[colors.normal]
+#black = "#0d1117"
+#red = "#ff7b72"
+#green = "#7ee787"
+#yellow = "#d29922"
+#blue = "#58a6ff"
+#magenta = "#d2a8ff"
+#cyan = "#39c5cf"
+#white = "#c9d1d9"
+#
+#[colors.bright]
+#black = "#484f58"
+#red = "#ff7b72"
+#green = "#7ee787"
+#yellow = "#d29922"
+#blue = "#58a6ff"
+#magenta = "#bc8cff"
+#cyan = "#39c5cf"
+#white = "#f0f6fc"
 
 [terminal.shell]
 program = "/bin/tmux"                    # ← Alacritty llama tmux
