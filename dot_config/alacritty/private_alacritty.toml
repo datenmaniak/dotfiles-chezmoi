@@ -42,7 +42,8 @@ multiplier = 3
 background = '#3B2D3B'
 #background = '#282828'
 #foreground = '#ebdbb2'
-foreground = '#F58427'
+#foreground = '#F58427'
+foreground = '#CFD966'
 
 [colors.normal]
 black   = '#282828'
