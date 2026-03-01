@@ -1,1 +1,1 @@
-vim.api.nvim_echo({{ "⚡ Violet Pulse Dev Ready ⚡", "Title" }}, false, {})
+vim.api.nvim_echo({{ "⚡ datenmaniak  Dev Ready ⚡", "Title" }}, false, {})

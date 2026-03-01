@@ -60,3 +60,7 @@ alias pass='GPG_TTY=$(tty) PINENTRY_USER_DATA="USE_CURSES=1" pass'
 # Cargar alias personalizados
 [[ -f ~/.zsh_aliases ]] && source ~/.zsh_aliases
 
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/var/home/willians/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)

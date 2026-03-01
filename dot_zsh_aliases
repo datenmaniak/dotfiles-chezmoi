@@ -33,8 +33,8 @@ alias pcd='podman compose down '                 # 💥 Detiene y borra volúmen
 alias pcl='podman compose logs -f'                 # 📜 Logs de todos los servicios
 
 # --- DISTROBOX ---
-alias dbls='distrobox list -e'                        # 📋 Lista distrobox exportados
-alias dbcr='distrobox create --image'                # 🆕 Crea distrobox (dbc fedora:39)
+alias dbls='distrobox list '                        # 📋 Lista distrobox exportados
+alias dbcr='distrobox create --name'                # 🆕 Crea distrobox (dbc fedora:39)
 alias dben='distrobox enter'                         # 🖥️  Entra a distrobox
 alias dbxp='distrobox-export --app'                  # 📦 Exporta app del contenedor
 alias dbrm='distrobox rm -f'                        # 🗑️  Elimina distrobox
@@ -90,8 +90,8 @@ palias() {
     echo "  pcl     → podman compose logs -f         + Podman Compose Logs"
     
     echo -e "\n📦 DISTROBOX:"
-    echo "  dbls     → distrobox list -e                        * Lista de contenedores Distrobox exportados"
-    echo "  dbcr     → distrobox create --image <i> --name <n>  * Crea contenedor Distrobox (distrobox create --name  -i fedora:43) "
+    echo "  dbls     → distrobox list                           * Lista de contenedores Distrobox exportados"
+    echo "  dbcr     → distrobox create --name                 * Crea contenedor Distrobox, e.g: distrobox create --name rancher --image ubuntu:24.04 [--hostname <container-name>] "
     echo "  dben     → distrobox enter                          * Entra al contenedor Distrobox  (distrobox enter fedora)"
     echo "  dbxp     → distrobox-export --app                   * Exportar app desde el contenedor Distrobox"
     echo "  dbrm     → distrobox rm -f                          * Eliminar forzadamente un Distrobox (distrobox rm -f fedora)"
@@ -113,3 +113,6 @@ alias pa='palias'
 
 # k8s
 alias k=kubectl
+ 
+# Sockets list
+alias sl='ss -tlpn' 
