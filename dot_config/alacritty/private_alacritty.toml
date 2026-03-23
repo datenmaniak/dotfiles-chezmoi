@@ -6,17 +6,18 @@ padding = { x = 10, y = 10 }
 dynamic_padding = true
 decorations = "Full"
 #decorations = "Buttonless"
-opacity = 0.95
+#opacity = 0.95
 startup_mode = "Maximized"
 
 [font]
 # ✅ Nerd Font para Starship + bling.sh icons
-normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
+normal = { family = "JetBrainsMono", style = "Regular" }
 bold = { family = "JetBrainsMono Nerd Font", style = "Bold" }
-italic = { family = "JetBrainsMono Nerd Font", style = "Italic" }
+italic = { family = "FiraCode, JetBrainsMono Nerd Font", style = "Italic" }
 size = 13.2850
 
 # 🎯 CRÍTICO: Fixea Zsh Tab completion + Tmux
+
 [env]
 TERM = "xterm-256color"
 
@@ -39,16 +40,17 @@ multiplier = 3
 
 
 [colors.primary]
-background = '#3B2D3B'
-#background = '#282828'
+#background = '#051029'
+background = '#160413'
+#background = '#090515'
 #foreground = '#ebdbb2'
-#foreground = '#F58427'
-foreground = '#CFD966'
+foreground = '#ffffff'
 
 [colors.normal]
 black   = '#282828'
 red     = '#cc241d'
-green   = '#98971a'
+#green   = '#98971a'
+green   = '#3ee56d'
 yellow  = '#d79921'
 blue    = '#458588'
 magenta = '#b16286'
