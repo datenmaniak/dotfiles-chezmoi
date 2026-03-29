@@ -7,7 +7,7 @@ dst_dir="$HOME/.config/chezmoi"
 mkdir -p "$dst_dir"
 
 # Identifica tu clave GPG (ajusta el correo)
-RECIPIENT="email@"
+RECIPIENT="AQUI email asociado al GPG"
 
 echo "Encriptando id_ed25519..."
 gpg --armor --encrypt \
