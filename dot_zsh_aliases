@@ -114,9 +114,11 @@ alias pa='palias'
 # k8s
 alias k=kubectl
 alias m=minikube  
-alias kgp=kubectl get pod
+alias kgp='kubectl get pod'
+alias kd='kubectl describe'
+alias kgn='kubectl get nodes'
 
 # Sockets list
-alias sl='ss -tlpn' 
+alias ss='ss -tlpn' 
 
 
