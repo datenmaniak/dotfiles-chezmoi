@@ -67,3 +67,6 @@ export PATH="/var/home/willians/.rd/bin:$PATH"
 #
 # Ajustes con ayuda de 'chezmoi doctor'
 export TMPDIR=~/tmp
+
+# Kubernetes
+export KUBECONFIG=~/.kube/config-homelab
