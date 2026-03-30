@@ -1,0 +1,18 @@
+#!/bin/sh
+# Solo ejecuta UNA vez para desencriptar SSH keys
+if [ ! -f ~/.ssh/id_ed25519 ]; then
+    echo "🔓 Desencriptando SSH keys..."
+    
+    chezmoi age decrypt \
+        --output ~/.ssh/id_ed25519 \
+        "$(chezmoi source-path)/dot_ssh_id_ed25519.age"
+    
+    chezmoi age decrypt \
+        --output ~/.ssh/id_ed25519.pub \
+        "$(chezmoi source-path)/dot_ssh_id_ed25519.pub.age"
+    
+    chmod 600 ~/.ssh/id_ed25519
+    chmod 644 ~/.ssh/id_ed25519.pub
+    
+    echo "✅ SSH keys restauradas"
+fi
