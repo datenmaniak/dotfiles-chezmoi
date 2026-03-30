@@ -70,3 +70,8 @@ export TMPDIR=~/tmp
 
 # Kubernetes
 export KUBECONFIG=~/.kube/config-homelab
+
+# editor
+export EDITOR=nvim
+
+
