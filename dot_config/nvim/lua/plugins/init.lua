@@ -14,6 +14,45 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Cargar plugins
 require("lazy").setup({
+
+  -- Peek
+  {
+  "toppair/peek.nvim",
+  event = { "VeryLazy" },
+  build = "deno task --quiet build:fast",
+  ft = { "markdown" },
+  config = function()
+    require("peek").setup({
+      auto_load = true,        -- abre el preview al entrar en Markdown
+      close_on_bdelete = true, -- cierra el preview si se borra el buffer
+      syntax = true,           -- sintaxis/color en el preview
+      theme = "dark",          -- o "light"
+      update_on_change = true, -- actualiza al escribir
+      throttle_at = 200000,    -- empieza a regularizar si el fichero es muy grande
+      throttle_time = "auto",
+      filetype = { "markdown" },
+    })
+  end,
+},
+
+
+  -- ================== Markdown ==================
+  {
+    "iamcco/markdown-preview.nvim",
+    -- build = function()
+    --   vim.fn["mkdp#util#install"]()
+    --end,
+    --
+    ft = { "markdown" },
+    build = ":call mkdp#util#install()",
+    config = function()
+      -- Se abre automático al entrar en un Markdown
+      vim.g.mkdp_auto_start = 1
+      vim.g.mkdp_auto_close = 1
+      vim.g.mkdp_refresh_slow = 0  -- actualiza en vivo
+    end,
+  },
+
   -- Explorador de archivos
   { "nvim-tree/nvim-tree.lua" },
 

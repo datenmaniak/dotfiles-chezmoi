@@ -75,3 +75,4 @@ export KUBECONFIG=~/.kube/config-homelab
 export EDITOR=nvim
 
 
+. "/home/wpatino/.deno/env"

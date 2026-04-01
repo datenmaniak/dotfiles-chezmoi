@@ -1,0 +1,191 @@
+ll
+rpm-ostree install libatomic alacritty  tmux zsh neovim 
+rpm-ostree search chezmoi
+systemctl reboot
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak install md.obsidian.Odsidian com.obsproject.Studio videolan.VLC com.vivaldi.Vivaldi
+free -h
+htop
+clear
+ll
+df -h
+which flatpak
+rpm-ostree status
+rpm-ostree search pass
+rpm-ostree install pass chezmoi
+rpm-ostree search vivaldi
+systemctl reboot
+htop
+top
+free -h
+which flatpak
+ll
+cd ~/Descargas/
+ll
+rpm-ostree install ./vivaldi-stable-7.9.3970.45-1.x86_64.rpm
+systemctl reboot
+ll
+ll ~/Descargas/
+ll
+cd workstation-bootstrap/
+wget https://dl.flathub.org/repo/flathub.flatpakrepo
+wget -c https://dl.flathub.org/repo/flathub.flatpakrepo
+wget -c https://dl.flathub.org/repo/flathub.flatpakrepo .
+wget -c https://dl.flathub.org/repo/flathub.flatpakrepo
+ll
+v
+touch flathub.flatpakrepo
+ll
+cat flathub.flatpakrepo 
+flatpak remote-add --if-not-exists flathub ./flathub.flatpakrepo
+git
+cd
+ll
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+rpm-ostree status
+curl -sS https://starship.rs/install.sh | sh
+sudo usermod --shell /usr/bin/zsh $USER
+exit
+df -h
+gpg --import /run/media/wpatino/bluefin_bluefin/home/willians/gpg-private-key.asc 
+ll 
+ls -la
+gpg --list-keys
+sh -c "$(curl -fsLS get.chezmoi.io)" -- -b $HOME/.local/bin
+chezmoi
+[200~
+chezmoi init https://github.com/<usuario>/dotfiles-chezmoi.git
+chezmoi init https://github.com/datenmaniak/dotfiles-chezmoi.git
+ll
+ls -lpa
+chezmoi apply
+pass
+git clone git@github.com:datenmaniak/pass-store.git ~/.password-store
+ll
+ls -lpa
+pass
+pass -c token/github 
+nvim ~/.config/alacritty/alacritty.toml 
+clear
+ll
+exit
+df -h
+cd /run/media/wpatino/bluefin_bluefin/home/willians/good-fonts-alacritty/
+ll
+unzip VictorMono.zip 
+ll
+ls
+unzip FiraCode.zip 
+ll
+ls
+./instala-fuentes.sh 
+./listar-fuentes-instaladas.sh 
+clear
+ll
+cd
+v
+alias
+chezmoi diff
+chezmoi cd
+ls -lpa  .ssh/
+ll
+pass
+ll
+rpm-ostree search obsidian
+exit
+curl -sS https://starship.rs/install.sh | sh
+exit
+sudo dnf install zsh 
+exit
+ll
+rpm-ostree search starship
+podman -v
+free -h
+v
+chezmoi apply
+chezmoi cd
+ls -la
+alias
+plr
+podman ps
+podman ps -a
+rpm-ostree search logseq
+ls ~/Descargas/
+rpm-ostree install ~/Descargas/Zettlr-4.3.1-x86_64.rpm 
+rpm-ostree status
+podman ps
+clear
+podman ps
+podman inspecty
+podman inspect
+podman inspect tools
+toolbox enter
+pass
+pass --help
+pass insert browser/vivaldi
+gpg --list-secret-keys --keyid-format=long
+gpg-connect-agent reloadagent /bye
+pass insert browser/vivaldi
+pass
+chezmoi apply
+pass
+pass insert vivaldi
+gpg --edit-key BC265166C808135E
+pass insert browser/vivaldi
+exit
+~/.config/nvim/lua/plugins/init.lua
+neovim ~/.config/nvim/lua/plugins/init.lua
+n~/.config/nvim/lua/plugins/init.lua
+n ~/.config/nvim/lua/plugins/init.lua
+v
+ll
+ls -lpa
+ll
+v
+alias
+ls -lpa
+nvim
+v
+ll
+git clone https://github.com/datenmaniak/obsidiannotes.git
+ll
+free -h
+flatpak remote-ls
+toolbox enter
+v
+chsh
+clear
+ll
+ls -lpa
+cat .zshrc
+mkdir ~/tmp
+ls -lpa
+ll
+history
+curl -sS https://starship.rs/install.sh | sh
+cat ~/.zsh |grep star
+cat ~/.zshrc  | grep star
+which starship
+toolbox create tools
+toolbox enter tools
+toolbox enter
+pass
+pass -c  secure/bitwarden 
+[200~gpg --list-keys --keyid-format=long
+gpg --list-keys --keyid-format=long
+gpg --edit-key BC265166C808135E
+pass insert browser/vivaldi 
+toolbox enter
+pass -c  browser/vivaldi 
+toolbox enter
+toolbox list
+flatpak list
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+toolbox enter
+which podman
+podman ls
+podman ps
+lsblk
+echo $USER
+which zsh
+chezmoi cd
