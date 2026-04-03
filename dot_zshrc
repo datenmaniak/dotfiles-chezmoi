@@ -74,5 +74,8 @@ export KUBECONFIG=~/.kube/config-homelab
 # editor
 export EDITOR=nvim
 
+# Desactivar la ventana de dialogo para autenticar: Git, SSH, etc
+unset SSH_ASKPASS
+export SSH_ASKPASS=""
 
-. "/home/wpatino/.deno/env"
+
