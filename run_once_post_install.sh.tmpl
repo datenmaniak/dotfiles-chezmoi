@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e
+
+echo "Activando battery-check.timer..."
+systemctl --user daemon-reload
+systemctl --user enable battery-check.timer
+systemctl --user start battery-check.timer
+
+echo "Activando lingering para el usuario $USER..."
+loginctl enable-linger $USER
+
