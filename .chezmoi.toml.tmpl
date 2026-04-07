@@ -1,7 +1,15 @@
-
-# template 
+# config base de chezmoi
 encryption = "gpg"
-
 [gpg]
-recipient = "FC2D53A582E62697D5D0875D29B2CCE0C67D26EF"
+    recipient = "F04F2B435FE7F2269E8B12EFB1B50FF873B531DA"
+
+[edit]
+    hardlink = false
+
+[pinentry]
+    command = "pinentry"
+
+[global]
+edit.command = "vim"
+
 
