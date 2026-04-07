@@ -1,11 +1,4 @@
-# Evitar que claves privadas entren accidentalmente
-**/*.key
-**/*.asc
-**/*.gpg
-.gnupg/private-keys-v1.d
-.gnupg/secring.gpg
-.gnupg/random_seed
-
-# Evitar carpetas de configuración de SSH sensibles
-#.ssh/id_rsa
-#.ssh/id_ed25519
+.*.*
+*.lock
+.gnupg/**/*.lock
+.gnupg/public-keys.d/

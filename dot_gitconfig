@@ -1,0 +1,9 @@
+[user]
+	email = ppwj@yahoo.com
+	name = Willians Patino
+	signingkey = ~/.ssh/id_ed25519.pub
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg
+	format = ssh
