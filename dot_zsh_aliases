@@ -114,9 +114,9 @@ alias pa='palias'
 # k8s
 alias k=kubectl
 alias m=minikube  
-alias kgp='kubectl get pod'
-alias kd='kubectl describe'
-alias kgn='kubectl get nodes'
+alias kget='kubectl get'
+alias kdes='kubectl describe'
+alias kgno='kubectl get nodes'
 
 # Sockets list
 alias ss='ss -tlpn' 
@@ -142,4 +142,13 @@ alias xzgrep='ug -z'
 alias zegrep='zegrep --color=auto'
 alias zfgrep='zfgrep --color=auto'
 alias zgrep='zgrep --color=auto'
+
+# Proxmox 
+alias pve="ssh -i ~/.ssh/datenmaniak root@kubik" 
+# Terraform 
+alias tf="terraform"
+
+
+# git 
+alias git-addcommit-push="git add . && git commit -m 'Regular Update' && git push" 
 

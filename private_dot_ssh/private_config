@@ -1,8 +1,0 @@
-Host github
-    Ignoreunknown UseKeychain
-    HostName github.com
-    AddKeysToAgent yes
-    User git
-    IdentitiesOnly yes
-    IdentityFile ~/.ssh/id_ed25519
-

@@ -7,65 +7,53 @@ dynamic_padding = true
 decorations = "Full"
 #decorations = "Buttonless"
 #opacity = 0.95
-startup_mode = "Maximized"
+#startup_mode = "Maximized"
 
 [font]
 # ✅ Nerd Font para Starship + bling.sh icons
-normal = { family = "VictorMono Nerd Font", style = "Regular" }
-bold = { family = "Ubuntu Sans Mono Nerd Font", style = "Bold" }
-italic = { family = "JetBrainsMono Nerd Font", style = "Italic" }
+italic = { family = "VictorMono Nerd Font", style = "Italic" }
+bold = { family = "JetBrainsMono Nerd Font", style = "Bold" }
+#bold = { family = "Ubuntu Sans Mono Nerd Font", style = "Bold" }
+normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
 size = 13.2850
 
-# 🎯 CRÍTICO: Fixea Zsh Tab completion + Tmux
 
 [env]
 TERM = "xterm-256color"
 
 # Keybindings para tu workflow DevOps/PHP
-[keyboard]
-bindings = [
-   # 🚪 CERRAR VENTANA COMPLETA (más importante)
-  { key = "Q", mods = "Control|Shift", action = "Quit" },
-
-  # 🔄 COPIAR/PEGAR NATURAL (Ctrl+C/V como otras apps) 
-  { key = "C", mods = "Control|Shift", action = "Copy" },
-  { key = "V", mods = "Control|Shift", action = "Paste" },
-]
 
 # Logs largos (Podman/Laravel)
 [scrolling]
 history = 10000
 multiplier = 3
 
-
-
 [colors.primary]
-#background = '#051029'
-background = '#160413'
-#background = '#090515'
-#foreground = '#ebdbb2'
-foreground = '#ffffff'
+# background = "#1a1b26" # Estilo Tokyo Night
+foreground = "#F88132"
+background = "#171A26"
 
+# Colores Normales: Se usan para el texto estándar y comandos
 [colors.normal]
-black   = '#282828'
-red     = '#cc241d'
-#green   = '#98971a'
-green   = '#3ee56d'
-yellow  = '#d79921'
-blue    = '#458588'
-magenta = '#b16286'
-cyan    = '#689d6a'
-white   = '#a89984'
+black   = "#32344a"
+red     = "#f7768e" # Errores en consola / Git deletes
+green   = "#9ece6a" # Éxito / Git adds
+yellow  = "#e0af68" # Warnings / Atributos
+blue    = "#7aa2f7" # Funciones / IDs
+magenta = "#ad8ee6" # Keywords (if, return, export)
+cyan    = "#44dfaf" # Strings / Regex
+white   = "#787c99"
 
+# Colores Bright: Versiones vibrantes para destacar elementos específicos
 [colors.bright]
-black   = '#928374'
-red     = '#fb4934'
-green   = '#b8bb26'
-yellow  = '#fabd2f'
-blue    = '#83a598'
-magenta = '#d3869b'
-cyan    = '#8ec07c'
-white   = '#ebdbb2'
+black   = "#444b6a"
+red     = "#ff007c"
+green   = "#b9f27c"
+yellow  = "#ff9e64" # Constantes / Nombres de clases
+blue    = "#7da6ff"
+magenta = "#bb9af7"
+cyan    = "#0db9d7"
+white   = "#acb0d0"
 
 
 ## Tus colores GitHub Dark (perfectos)
@@ -95,5 +83,5 @@ white   = '#ebdbb2'
 #white = "#f0f6fc"
 
 [terminal.shell]
-program = "/bin/tmux"                    # ← Alacritty llama tmux
+program = "/usr/bin/tmux"                    # ← Alacritty llama tmux
 args = ["new-session", "-A", "-s", "main"] # ← Crea/une sesión main
