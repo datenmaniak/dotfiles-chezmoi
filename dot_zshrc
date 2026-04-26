@@ -69,7 +69,7 @@ export PATH="/var/home/willians/.rd/bin:$PATH"
 export TMPDIR=~/tmp
 
 # Kubernetes
-export KUBECONFIG=~/.kube/config-homelab
+#export KUBECONFIG=~/.kube/config-homelab
 
 # editor
 export EDITOR=nvim
@@ -128,4 +128,10 @@ fi
 #export KUBECONFIG="$HOME/.kube/config"
 
 
-export KUBECONFIG=~/.kube/config
+# k8s-master en la red 192.168.1.0/24
+# export KUBECONFIG=~/.kube/config
+
+# k3s master en la red 10.0.0.0/24
+export KUBECONFIG=~/.kube/kubeconfig-10-0-0-100
+# IP 10.10.10.100
+# IP del Firewall: 192.168.1.2

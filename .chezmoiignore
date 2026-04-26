@@ -3,3 +3,4 @@
 .gnupg/**/*.lock
 .gnupg/public-keys.d/
 .gnupg/random_seed
+.kube/cache
