@@ -1,154 +1,195 @@
-
 # ========================================
-# ALIAS PODMAN - IMÁGENES Y CONTENEDORES
-# Para Bluefin/Fedora con Podman rootless
+# ALIASES OPTIMIZADOS
 # ========================================
 
-# --- IMÁGENES ---
-alias pi='podman images'                            # 📋 Lista todas las imágenes locales
-alias pil='podman image list'                       # 📋 Lista imágenes (formato largo)
-alias piu='podman pull'                             # ⬇️  Descarga imagen (piu fedora:39)
-alias pip='podman image prune -f'                   # 🧹 Limpia imágenes no usadas (dangling)
-alias pirm='podman image rm -f'                     # 🗑️  Elimina imagen(es) forzando
-alias pib='podman build -t '                       # 🏗️  Construye imagen en base al Dockerfile local (pib miapp .)
+# ----------------------------------------
+# NAVEGACIÓN RÁPIDA
+# ----------------------------------------
+alias c='cd'
+alias c..='cd ..'
+alias c...='cd ../..'
+alias c....='cd ../../..'
+alias cdev='cd ~/dev'
+alias cdot='cd ~/.dotfiles'
+alias cconf='cd ~/.config'
+alias cchez='cd ~/.local/share/chezmoi'
+alias d='dirs -v'
+alias dh='cd ~'
+alias d1='cd +1'
+alias d2='cd +2'
+alias d0='cd -'
+alias q='exit'
+alias cl='clear'
+alias cls='clear && ls'
+alias path='echo $PATH | tr ":" "\n" | nl'
 
-# --- CONTENEDORES ---
-alias plc='podman ps -a'                          # 📋 Lista TODOS los contenedores
-alias plr='podman ps'                             # ▶️  Lista solo contenedores corriendo
-alias prur='podman run -it --rm'                  # ▶️  Ejecuta interactivo y auto-borra
-alias prud='podman run -d'                        # ▶️  Ejecuta en background
-alias psta='podman start -i'                      # ▶️  Inicia contenedor apagado (interactivo, SIN borrar)
-alias psto='podman stop'                          # ⏹️  Detiene contenedor(es)
-alias pres='podman restart'                       # 🔄  Reinicia contenedor(es)
-alias prmf='podman rm -f'                         # 🗑️  Elimina contenedor(es) forzando
-alias plog='podman logs -f'                       # 📜  Logs en tiempo real (plog contenedor)
-alias pexe='podman exec -it'                     # 🖥️  Entra a contenedor corriendo
-alias plp='podman port'                           # 🖥️  Listar puertos del contenedor
+# ----------------------------------------
+# LISTADO (con eza)
+# ----------------------------------------
+alias ls='eza -lh --group-directories-first --icons=auto'
+alias lsa='ls -a'
+alias ll='eza -l --icons=auto --group-directories-first'
+alias l='eza -lh --icons=auto'
+alias la='eza -la --icons=auto'
+alias l1='eza -1'
+alias l.='eza -d .*'
+alias tree1='eza --tree --level=1'
+alias tree2='eza --tree --level=2'
+alias treeg='eza --tree --git-ignore'
 
-# --- PODMAN-COMPOSE ---
-alias pcc='podman compose'                          # 🎛️  Compose principal (pdc up/down)
-alias pcud='podman compose up -d'                   # 🚀 Levanta servicios en background
-alias pcudv='podman compose down -v'                 # 💥 Detiene y borra volúmenes
-alias pcd='podman compose down '                 # 💥 Detiene y borra volúmenes
-alias pcl='podman compose logs -f'                 # 📜 Logs de todos los servicios
+# ----------------------------------------
+# PODMAN (optimizado y sin duplicados)
+# ----------------------------------------
+alias p='podman'
+alias pc='podman-compose'
+alias pe='podman exec -it'
+alias pl='podman logs -f'
+alias pr='podman run -it --rm'
+alias prd='podman run -d'
+alias psa='podman ps -a'
+alias psr='podman ps'
+alias psu='podman system prune -f'
+alias pi='podman images'
+alias pils='podman image list'
+alias pipu='podman pull'
+alias piprune='podman image prune -f'
+alias pirm='podman image rm -f'
+alias podb='podman build '
+alias psta='podman start -i'
+alias psto='podman stop'
+alias pres='podman restart'
+alias prmf='podman rm -f'
+alias plp='podman port'
+alias pvol='podman volume ls'
+alias pnl='podman network ls'
+alias pni='podman network inspect'
+alias psi='podman system info'
 
-# --- DISTROBOX ---
-alias dbls='distrobox list '                        # 📋 Lista distrobox exportados
-alias dbcr='distrobox create --name'                # 🆕 Crea distrobox (dbc fedora:39)
-alias dben='distrobox enter'                         # 🖥️  Entra a distrobox
-alias dbxp='distrobox-export --app'                  # 📦 Exporta app del contenedor
-alias dbrm='distrobox rm -f'                        # 🗑️  Elimina distrobox
+# ----------------------------------------
+# PODMAN-COMPOSE
+# ----------------------------------------
+alias pcu='podman-compose up -d'
+alias pcd='podman-compose down'
+alias pcdv='podman-compose down -v'
+alias pcl='podman-compose logs -f'
+alias pcr='podman-compose restart'
 
-# --- UTILIDADES ---
-alias pclean='podman rm -f -a && podman image prune -a -f'  - 🧹Limpieza total
-alias pvol='podman volume ls'                               - 📦Lista volúmenes
-alias pnl='podman network ls'                               -   🌐 Lista redes
-alias pni='podman network inspect'                          -   Inspeccionar una red Container
-alias psi='podman system info'                      # ℹ️  Info completa del sistema Podman
+# ----------------------------------------
+# DISTROBOX
+# ----------------------------------------
+alias dbls='distrobox list'
+alias dbcr='distrobox create --name'
+alias dben='distrobox enter'
+alias dbxp='distrobox-export --app'
+alias dbrm='distrobox rm -f'
 
-# === USO RÁPIDO ===
-# plc                # Ver contenedores
-# pi                # Ver imágenes  
-# pstart mi-contenedor  # ← NUEVO: Iniciar contenedor apagado
-# prun fedora:39    # Probar imagen nueva
-# pcud              # Levantar compose
-# dbls                # Ver distrobox
+# ----------------------------------------
+# CHEZMOI
+# ----------------------------------------
+alias czs='chezmoi status'
+alias czd='chezmoi diff'
+alias cza='chezmoi apply -v'
+alias czr='chezmoi re-add'
+alias czdiff='chezmoi diff --verbose'
+alias czedit='chezmoi edit'
+alias czadd='chezmoi add'
+alias czapply='chezmoi apply -v --force'
+alias czrepo='cd ~/.local/share/chezmoi/ && ls -la'
 
-# ========================================
-# AYUDA RÁPIDA - ALIAS PODMAN Y DISTROBOX
-# Copia al final de ~/.zsh_aliases
-# ========================================
+# ----------------------------------------
+# GIT
+# ----------------------------------------
+alias g='git'
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gcm='git commit -m'
+alias gp='git push'
+alias gpl='git pull'
+alias gl='git log --oneline --graph'
+alias gd='git diff'
+alias gb='git branch'
+alias gco='git checkout'
 
-# --- FUNCIÓN DE AYUDA ---
-palias() {
-    echo "🚀 ALIAS PODMAN Y DISTROBOX DISPONIBLES\n"
-    echo "📋 IMÁGENES:"
-    echo "  pi      → podman images                   = Lista imágenes"
-    echo "  piu     → podman pull                     = Descargar imagen (podman pull fedora:39)"
-    echo "  pip     → podman image prune -f           = Limpia no usadas"
-    echo "  pirm    → podman image rm -f              = Elimina imagen"
-    echo "  pib     → podman build -t                = Construye imagen en base el Dockerfile local"
-    
-    echo -e "\n▶️  CONTENEDORES:"
-    echo "  plc     → podman ps -a                     - Lista todos los contenedores"
-    echo "  plr     → podman ps                        - Listar solo contenedores corriendo"
-    echo "  psta    → podman start -i                  - Inicia contenedor apagado"
-    echo "  prur    → podman run -it --rm              - Crear nuevo contenedor + auto-borra al salir"
-    echo "  prud    → podman run -d                    - Crear y ejecuta en background"
-    echo "  psto    → podman stop                      - Detiene"
-    echo "  prmf    → podman rm -f                     - Elimina contenedor forzadamente"
-    echo "  plog    → podman logs -f                   - Logs en tiempo real"
-    echo "  prmf    → podman rm -f                     - Elimina contenedor forzadamente"
-    echo "  pexe    → podman exec -it                  - Entrar en el contenedor que ya está corriendo"
-    echo "  plp     → podman port                      - Listar puerto del contenedor"
-    
-    echo -e "\n🎛️  COMPOSE:"
-    echo "  pcu     → podman compose                 + Podman compose"
-    echo "  pcud    → podman compose up -d           + Iniciar compose en el background"
-    echo "  pcudv   → podman compose down -v         + Detiene composer y borra volúmenes"
-    echo "  pcud    → podman compose down            + Detiene composer sin borrar volúmenes"
-    echo "  pcl     → podman compose logs -f         + Podman Compose Logs"
-    
-    echo -e "\n📦 DISTROBOX:"
-    echo "  dbls     → distrobox list                           * Lista de contenedores Distrobox exportados"
-    echo "  dbcr     → distrobox create --name                 * Crea contenedor Distrobox, e.g: distrobox create --name rancher --image ubuntu:24.04 [--hostname <container-name>] "
-    echo "  dben     → distrobox enter                          * Entra al contenedor Distrobox  (distrobox enter fedora)"
-    echo "  dbxp     → distrobox-export --app                   * Exportar app desde el contenedor Distrobox"
-    echo "  dbrm     → distrobox rm -f                          * Eliminar forzadamente un Distrobox (distrobox rm -f fedora)"
-    
-    echo -e "\n🧹 UTILIDADES:"
-    echo "  pclean  → Limpieza TOTAL contenedores+imágenes     --  Precaución: ELIMINA TODO ::  podman rm -f -a && podman prune -a -f"
-    echo "  plog    → podman logs -f                           --  Podman Logs realtime"
-    echo "  pvol    → podman volume ls                         --  Lista volúmenes"
-    echo "  psi     → podman system info                       --  Info completa del sistema Podman"
-    echo "  pnl     → podman network list                      --  Listar redes Podman"
-    echo " pni      > podman network inspect                   -   Inspeccionar una red Container"
-    echo -e "\n❓ USO: 'palias' (esta ayuda)"
-    echo "🎯 TIP: 'plc' para ver contenedores corriendo"
-}
-
-# REGISTRAR LA FUNCIÓN COMO ALIAS CORTITO
-alias pa='palias'
-#alias ?='palias'
-
-# k8s
-alias k=kubectl
-alias m=minikube  
+# ----------------------------------------
+# KUBERNETES
+# ----------------------------------------
+alias k='kubectl'
+alias m='minikube'
 alias kget='kubectl get'
 alias kdes='kubectl describe'
 alias kgno='kubectl get nodes'
+alias k8s-homelab='set-k8s homelab'
+alias k8s-local='set-k8s local'
 
-# Sockets list
-alias ss='ss -tlpn' 
+# ----------------------------------------
+# HISTORIAL (lo que pediste)
+# ----------------------------------------
+alias h='history -n 1 | tail -50'
+alias hg='history -n 1 | grep'
+alias hfzf='history -n 1 | fzf --tac --tiebreak=index'
+alias ht='history -n 1 | awk "{print \$2}" | sort | uniq -c | sort -rn | head -20'
+alias hist='history -E 1 | tail -50 | nl'
 
-# repotencia alias
-#alias cat='bat --style=plain --pager=never'
+# ----------------------------------------
+# BÚSQUEDA Y VISUALIZACIÓN
+# ----------------------------------------
+alias grep='ug --color=auto'
+alias grepi='ug -i'
+alias grepr='ug -r'
 alias egrep='ug -E'
-alias fastfetch='ublue-fastfetch'
 alias fgrep='ug -F'
-alias grep='ug'
-alias l.='eza -d .*'
-alias l1='eza -1'
-alias ll='eza -l --icons=auto --group-directories-first'
-alias ls='eza'
+alias cat='bat --style=plain --pager=never'
+alias less='bat --pager=less'
+alias ff='fzf --preview "bat --style=numbers --color=always {} 2>/dev/null || cat {}"'
+alias fp='ps aux | fzf --header-lines=1'
+
+# ----------------------------------------
+# SISTEMA
+# ----------------------------------------
+alias dfh='df -h | grep -v "tmpfs\|loop"'
+alias du1='du -h --max-depth=1 | sort -hr'
+alias ports='ss -tulpn | grep LISTEN'
+alias ss='ss -tlpn'
+alias please='sudo $(fc -ln -1)'
+
+# ----------------------------------------
+# SSH Y REMOTO
+# ----------------------------------------
+alias pve="ssh -i ~/.ssh/datenmaniak root@pve.dk.lab"
+alias k3s="ssh -i ~/.ssh/datenmaniak datenk@fw.dk.lab -p 2210"
+alias wk1="ssh -i ~/.ssh/datenmaniak datenk@fw.dk.lab -p 2211"
+alias wk2="ssh -i ~/.ssh/datenmaniak datenk@fw.dk.lab -p 2212"
+alias fw="ssh admin@fw.dk.lab"
+
+# ----------------------------------------
+# OTRAS HERRAMIENTAS
+# ----------------------------------------
+alias tf='terraform'
+alias vi='nvim'
+alias v='nvim'
+alias open='xdg-open &>/dev/null'
 alias neofetch='ublue-fastfetch'
 alias neowofetch='ublue-fastfetch'
-alias open='xdg-open &>/dev/null'
-alias vi='vim'
-alias which='(alias; declare -f) | /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot'
-alias xzegrep='ug -zE'
-alias xzfgrep='ug -zF'
-alias xzgrep='ug -z'
-alias zegrep='zegrep --color=auto'
-alias zfgrep='zfgrep --color=auto'
-alias zgrep='zgrep --color=auto'
+alias fastfetch='ublue-fastfetch'
+alias php8000='php -S localhost:8000'
 
-# Proxmox 
-alias pve="ssh -i ~/.ssh/datenmaniak root@pve.homelab" 
-# Terraform 
-alias tf="terraform"
+# ----------------------------------------
+# FUNCIONES DE AYUDA
+# ----------------------------------------
+palias() {
+    echo "🚀 ALIAS DISPONIBLES\n"
+    echo "📂 NAVEGACIÓN: c, cdev, cdot, d (dirs), d1, d2"
+    echo "🐳 PODMAN: p, ps, pr, pe, pl, pcu, pcd"
+    echo "📦 DISTROBOX: dbls, dben, dbrm"
+    echo "🔄 CHEZMOI: czs, czd, cza, czdiff, czedit"
+    echo "📜 HISTORIAL: h (últimos 50), hfzf (buscar), ht (top comandos)"
+    echo "🔍 BÚSQUEDA: grep, ff (archivos con fzf), fp (procesos)"
+    echo "🎯 GIT: gs, ga, gc, gp, gl"
+    echo ""
+    echo "❓ USO: 'palias' para esta ayuda"
+}
+alias pa='palias'
 
-
-# git 
-alias git-addcommit-push='git add . && git commit -m "Regular Update" && git push'
-
+# Limpieza (alias seguros)
+alias pclean='pclean-all'

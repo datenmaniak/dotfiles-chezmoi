@@ -1,0 +1,9 @@
+pane	2	0	1	:*	0	aurora	:/var/home/datenmaniak	1	zsh	:
+pane	3	0	1	:*	0	aurora	:/var/home/datenmaniak	1	zsh	:
+pane	default	0	1	:*	0	aurora	:/var/home/datenmaniak	1	zsh	:
+pane	main	0	1	:*	0	aurora	:/var/home/datenmaniak	1	zsh	:
+window	2	0	:zsh	1	:*	b8c0,190x43,0,0,3	:
+window	3	0	:zsh	1	:*	b521,99x33,0,0,4	:
+window	default	0	:zsh	1	:*	c49f,90x38,0,0,2	:
+window	main	0	:zsh	1	:*	b8bd,190x43,0,0,0	:
+state	2	

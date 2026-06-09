@@ -1,87 +1,75 @@
-# ~/.config/alacritty/alacritty.toml
-# OPTIMIZADO para .zshrc reciente + Fedora Kinoite 2026
-
 [window]
-padding = { x = 10, y = 10 }
-dynamic_padding = true
+opacity = 1.0
 decorations = "Full"
-#decorations = "Buttonless"
-#opacity = 0.95
-#startup_mode = "Maximized"
+dynamic_title = true
+startup_mode = "Windowed"
+padding = { x = 8, y = 8 }
+
+
+
+[font.offset]
+x = 0
+y = 3 # Más espacio vertical para reducir la fatiga en lecturas largas
+
+[colors.primary]
+background = "#242424" # Fondo más profundo, elimina el lavado gris
+#background = "#1b1b1c" # Fondo más profundo, elimina el lavado gris
+#background = "#2f2c29" # Fondo más profundo, elimina el lavado gris
+foreground = "#c0bd9e" # Blanco de alta visibilidad, elimina lo opaco
+#foreground = "#e9e5e5" # Blanco de alta visibilidad, elimina lo opaco
+dim_foreground = "#94A3B8"
+
+[colors.normal]
+black   = "#1A1A1E"
+red     = "#EF4444" # Colores con más vida para identificarlos sin esfuerzo
+green   = "#22C55E"
+yellow  = "#EAB308"
+blue    = "#3B82F6"
+magenta = "#D946EF"
+cyan    = "#06B6D4"
+white   = "#F5F5F5"
+
+[colors.bright]
+black   = "#64748B"
+red     = "#F87171"
+green   = "#4ADE80"
+yellow  = "#FDE047"
+blue    = "#60A5FA"
+magenta = "#F472B6"
+cyan    = "#22D3EE"
+white   = "#FFFFFF"
+
+#import = ["~/configs-alacritty/alacritty.toml-obsidian-max-enfoque"]
 
 [font]
-# ✅ Nerd Font para Starship + bling.sh icons
-italic = { family = "VictorMono Nerd Font", style = "Italic" }
+# VictorMono para itálicas fluidas y JetBrains para legibilidad técnica
+normal = { family = "JetBrainsMono Nerd Font", style = "Medium" }
 bold = { family = "JetBrainsMono Nerd Font", style = "Bold" }
-#bold = { family = "Ubuntu Sans Mono Nerd Font", style = "Bold" }
-normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
-size = 13.2850
+italic = { family = "JetBrainsMono Nerd Font", style = "Italic" }
+#italic = { family = "VictorMono Nerd Font", style = "Italic" }
+size = 13 # Ajusta este valor según la pantalla para que no uses zoom
 
+
+[scrolling]
+history = 100000
+multiplier = 3
+
+[selection]
+save_to_clipboard = false
+
+[terminal]
+shell = { program = "/usr/bin/tmux", args = ["new-session", "-A", "-s", "main"] }
+
+[general]
+live_config_reload = true
+import = []
 
 [env]
 TERM = "xterm-256color"
 
-# Keybindings para tu workflow DevOps/PHP
+# pegar texto. Alt+V 
+[[keyboard.bindings]]
+key = "V"
+mods = "Alt"
+action = "Paste"
 
-# Logs largos (Podman/Laravel)
-[scrolling]
-history = 10000
-multiplier = 3
-
-[colors.primary]
-# background = "#1a1b26" # Estilo Tokyo Night
-foreground = "#F88132"
-background = "#171A26"
-
-# Colores Normales: Se usan para el texto estándar y comandos
-[colors.normal]
-black   = "#32344a"
-red     = "#f7768e" # Errores en consola / Git deletes
-green   = "#9ece6a" # Éxito / Git adds
-yellow  = "#e0af68" # Warnings / Atributos
-blue    = "#7aa2f7" # Funciones / IDs
-magenta = "#ad8ee6" # Keywords (if, return, export)
-cyan    = "#44dfaf" # Strings / Regex
-white   = "#787c99"
-
-# Colores Bright: Versiones vibrantes para destacar elementos específicos
-[colors.bright]
-black   = "#444b6a"
-red     = "#ff007c"
-green   = "#b9f27c"
-yellow  = "#ff9e64" # Constantes / Nombres de clases
-blue    = "#7da6ff"
-magenta = "#bb9af7"
-cyan    = "#0db9d7"
-white   = "#acb0d0"
-
-
-## Tus colores GitHub Dark (perfectos)
-#[colors.primary]
-#background = "#0d1117"
-#foreground = "#c9d1d9"
-#bright_foreground = "#f0f6fc"
-#
-#[colors.normal]
-#black = "#0d1117"
-#red = "#ff7b72"
-#green = "#7ee787"
-#yellow = "#d29922"
-#blue = "#58a6ff"
-#magenta = "#d2a8ff"
-#cyan = "#39c5cf"
-#white = "#c9d1d9"
-#
-#[colors.bright]
-#black = "#484f58"
-#red = "#ff7b72"
-#green = "#7ee787"
-#yellow = "#d29922"
-#blue = "#58a6ff"
-#magenta = "#bc8cff"
-#cyan = "#39c5cf"
-#white = "#f0f6fc"
-
-[terminal.shell]
-program = "/usr/bin/tmux"                    # ← Alacritty llama tmux
-args = ["new-session", "-A", "-s", "main"] # ← Crea/une sesión main

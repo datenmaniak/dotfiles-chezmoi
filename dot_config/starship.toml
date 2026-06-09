@@ -1,53 +1,53 @@
-# Estilo base del prompt
+# ==============================================================================
+# STARSHIP CONFIGURATION - PROMPT ERGONÓMICO EN DOS LÍNEAS
+# Optimizado con la paleta Monokai Cálida
+# ==============================================================================
+
+# Estructura limpia y secuencial en DOS líneas estrictas (Evita duplicados)
 format = """
-[🐧](bold green)$battery$hostname$directory$git_branch$git_status$nodejs$package
-$character
-"""
+$battery
+$username$hostname$directory$git_branch$git_status$nodejs$package$cmd_duration
+$character"""
 
-
-[hostname]
-ssh_only = false
-format = "[$hostname]($style) " # El espacio al final ayuda a la legibilidad
-style = "bold dimmed white"      # Puedes cambiar el color aquí
-disabled = false                 # Asegúrate de que no esté desactivado
-
-
-[custom.min_path]
-command = "echo $STARSHIP_MIN_PATH"
-style = "bold purple"
-format = "📁 [$output]($style) "
-
-[custom.dir_segments]
-command = "echo $STARSHIP_DIR_SEGMENTS"
-style = "bold purple"
-format = "📁 [$output]($style) "
-
-
-#$custom.battery_alert
-
-# Símbolo de entrada
+# Símbolo de entrada principal (Línea 2 limpia exclusivamente para comandos)
 [character]
-#success_symbol = "[➜](bold #7700F0)"
-error_symbol = "[✗](bold red)"
-vicmd_symbol = "[V](bold green)"
+#success_symbol = "[➜](bold #fc9867)" # Naranja Monokai distintivo
+error_symbol = "[✗](bold #ff6188)"   # Rojo Monokai para errores de ejecución
+vicmd_symbol = "[V](bold #a6e22e)"   # Verde para modo comando de Vi/Neovim
 
-# Directorio actual
+# Directorio actual inteligente (Recorta rutas excesivamente largas)
 [directory]
-# style = "bold purple"
 truncation_length = 2
 truncate_to_repo = true
-style = "bold green"
+truncation_symbol = ".../"
+style = "bold #66d9ef"              # Cian Monokai para la ruta
 format = "[$path]($style) "
-truncation_symbol = '…/'
+#format = "📁 [$path]($style) "
 
-# Git branch
+# Gestión de Batería en tiempo real sin saturar la ruta principal
+[battery]
+full_symbol = "🔋 "
+charging_symbol = "⚡ "
+discharging_symbol = "🔻 "
+disabled = false
+
+[[battery.display]]
+threshold = 10
+style = "bold #ff6188"              # Alerta roja si es menor al 20%
+
+[[battery.display]]
+threshold = 100
+style = "bold #a6e22e"              # Color verde Monokai estable
+
+# Entorno de Git - Ramas
 [git_branch]
 symbol = "🌿 "
-style = "bold #7700F0"
+style = "bold #fc9867"              # Naranja Monokai
+format = "on [$symbol$branch]($style) "
 
-# Git status
+# Entorno de Git - Estados visuales rápidos
 [git_status]
-style = "bold purple"
+style = "bold #ae81ff"              # Lila Monokai
 conflicted = "⚔️ "
 ahead = "⇡${count}"
 behind = "⇣${count}"
@@ -56,40 +56,26 @@ untracked = "🌀 "
 stashed = "📦 "
 modified = "🛠️ "
 staged = "🟩 "
-renamed = "🔀 "
 deleted = "🗑️ "
+format = "[$all_status$text]($style) "
 
-# Node.js
+# Entornos de desarrollo de microservicios (Laravel/Node)
 [nodejs]
-symbol = "🟢 "
-style = "bold green"
+symbol = "🟢 Node "
+style = "bold #a6e22e"
+format = "via [$symbol$version]($style) "
 
-# Package (NPM)
 [package]
 symbol = "📦 "
-style = "bold yellow"
+style = "bold #f4bf75"
+format = "is [$symbol$version]($style) "
 
-# Batería
-[battery]
-full_symbol = "🔋"
-charging_symbol = "⚡"
-discharging_symbol = "🔻"
+[hostname]
+ssh_only = true                     # Solo se muestra si estás dentro de una sesión remota/SSH
+style = "bold dimmed #f8f8f2"
+format = "at [$hostname]($style) "
 
-
-[[battery.display]]
-threshold = 15
-style = "bold red"
-discharging_symbol = "🪫"
-charging_symbol = "🪫"
-
-[[battery.display]]
-threshold = 100
-style = "bold #7700F0"
-
-# Alerta visual si batería baja
-# [custom.battery_alert]
-# command = "echo '🐧'"
-# # when = "env.STARSHIP_BATTERY_ALERT == 'low'"
-# style = "bold red"
-# format = "$output"
-
+[cmd_duration]
+min_time = 2_000                    # Te avisa si un comando (ej: despliegue pod/db) tarda más de 2 segundos
+style = "bold #f4bf75"
+format = "took [$duration]($style) "

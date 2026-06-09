@@ -1,11 +1,18 @@
 # vim:fileencoding=utf-8:foldmethod=marker
 
 # BEGIN_KITTY_FONTS
-font_family      family="FiraCode Nerd Font"
+font_family      family="JetBrains Mono NL"
 bold_font        auto
 italic_font      auto
 bold_italic_font auto
 # END_KITTY_FONTS
+
+
+# Pegar desde clipboard con Alt+V (simplificado de Ctrl+Shift+V)
+map alt+v paste_from_clipboard
+
+# Opcional: Copiar con Alt+C
+map alt+c copy_to_clipboard
 
 #: Fonts {{{
 
@@ -27,7 +34,7 @@ bold_italic_font auto
 #: <https://sw.kovidgoyal.net/kitty/kittens/choose-fonts/#font-spec-
 #: syntax>.
 
-# font_size 11.0
+font_size 14.0
 
 #: Font size (in pts).
 
@@ -272,7 +279,7 @@ bold_italic_font auto
 #: described above instead of the % mode of operation.
 
 #: }}}
-font_size 11
+font_size 14.25
 #: Text cursor customization {{{
 # cursor #cccccc
 
@@ -394,7 +401,7 @@ cursor_shape_unfocused hollow
 
 #: Scrollback {{{
 
-# scrollback_lines 2000
+scrollback_lines -1
 
 #: Number of lines of history to keep in memory for scrolling back.
 #: Memory is allocated on demand. Negative numbers are (effectively)
@@ -432,7 +439,7 @@ cursor_shape_unfocused hollow
 #: position will only move towards the position by a single screenful,
 #: which is how traditional scrollbars behave.
 
-# scrollbar_width 0.5
+scrollbar_width 0.5
 
 #: The width of the scroll bar in units of cell width.
 
@@ -3157,6 +3164,6 @@ map cmd+v       paste_from_clipboard
 
 
 # BEGIN_KITTY_THEME
-# 1984 Light
+# Cherry Midnight
 include current-theme.conf
 # END_KITTY_THEME
