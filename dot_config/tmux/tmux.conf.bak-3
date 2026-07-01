@@ -1,0 +1,123 @@
+# Cambiar el prefijo de Ctrl+b a Alt+q (más cómodo)
+unbind C-b
+set-option -g prefix M-q
+bind-key M-q send-prefix
+
+# Habilitar el ratón (útil al principio)
+# Activar el ratón por completo
+set -g mouse on
+
+# Mantener el modo copia al seleccionar con el ratón
+# (Evita que tmux salte al final de la pantalla al soltar el clic)
+unbind -T copy-mode-vi MouseDragEnd1Pane
+
+# Hacer que el scroll sea más rápido
+bind -n WheelUpPane if-shell -F -t = "#{mouse_any_flag}" "send-keys -M" "if -t= '#{pane_in_mode}' 'send-keys -M' 'copy-mode -e'"
+
+# Dividir paneles de forma clara e intuitiva
+bind | split-window -h   # Panel a la derecha (vertical)
+bind - split-window -v   # Panel abajo (horizontal)
+
+# Mejorar los colores
+set -g default-terminal "screen-256color"
+
+# AÑADE ESTO para que Tmux mantenga los colores verdaderos (True Color) de Alacritty:
+set -as terminal-features ",xterm-256color:RGB"
+set -as terminal-features ",alacritty:RGB"
+
+# Mejorar respuesta (evita retrasos en la tecla ESC)
+set -s escape-time 50
+
+set -g repeat-time 600  # Te da más margen (milisegundos) para repetir la tecla
+
+bind-key -T copy-mode-vi v send -X begin-selection
+bind-key -T copy-mode-vi y send -X copy-selection-and-cancel
+
+# 1. Navegación rápida entre paneles (sin prefijo)
+bind -n M-h select-pane -L
+bind -n M-j select-pane -D
+bind -n M-k select-pane -U
+bind -n M-l select-pane -R
+
+# 2. Zoom al panel actual
+bind z resize-pane -Z
+
+# 3. Nuevos paneles/ventanas en el directorio actual
+bind c new-window -c "#{pane_current_path}"
+
+# 4. Redimensionar paneles
+bind -n M-H resize-pane -L 5
+bind -n M-J resize-pane -D 5
+bind -n M-K resize-pane -U 5
+bind -n M-L resize-pane -R 5
+
+# ============================================================
+# BARRA DE ESTADO COMPLETA - datenmaniak PRO (con scripts)
+# ============================================================
+
+# ----- CONFIGURACIÓN GENERAL -----
+set -g status-position bottom
+set -g status-justify left
+set -g status-style "bg=#0A0A0F,fg=#e2e8f0"
+set -g status-left-length 60
+set -g status-right-length 150
+
+# ----- BARRA IZQUIERDA (Sesión + directorio actual) -----
+set -g status-left "#[fg=#7700F0,bold] 󰯈 #S #[fg=#a366ff]│ #[fg=#e2e8f0]#{pane_current_path} "
+
+# ----- BARRA DERECHA (usando scripts de ~/.config/tmux/scripts/) -----
+set -g status-right "#[fg=#7d2eff] 󰻠 #(~/.config/tmux/scripts/load.sh) #[fg=#a366ff]│ #[fg=#e2e8f0]󰤨 #(~/.config/tmux/scripts/ip.sh) #[fg=#a366ff]│ #[fg=#e2e8f0] #(~/.config/tmux/scripts/temp.sh) #[fg=#a366ff]│ #[fg=#e2e8f0]%d/%m %H:%M "
+
+# ----- VENTANAS (con estilo mejorado) -----
+setw -g window-status-format " #[fg=#94a3b8]#I:#W "
+setw -g window-status-separator ""
+setw -g window-status-current-format " #[fg=#7700F0,bold]#I:#W #[fg=#a366ff]✦"
+setw -g window-status-current-style "bg=#1A0B2E,fg=#7700F0,bold"
+
+# ----- INDICADORES -----
+setw -g window-status-activity-style "fg=#a366ff"
+set -g visual-activity on
+set -g monitor-activity on
+
+# ----- ESTILO DE MENSAJES -----
+set -g message-style "bg=#7700F0,fg=#ffffff"
+set -g mode-style "bg=#7d2eff,fg=#ffffff"
+
+# ============================================================
+# PLUGINS CON TPM - ESTRUCTURA ~/.config/tmux/
+# ============================================================
+
+# ----- RUTA DE PLUGINS (USANDO ~/.config/tmux/) -----
+set-environment -g TMUX_PLUGIN_MANAGER_PATH '~/.config/tmux/plugins'
+
+# ----- LISTA DE PLUGINS -----
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-continuum'
+
+# ----- CONFIGURACIÓN DE RESURRECT (con rutas corregidas) -----
+set -g @resurrect-capture-pane-contents 'on'
+set -g @resurrect-strategy-vim 'session'
+set -g @resurrect-strategy-neovim 'session'
+set -g @resurrect-strategy-nvim 'session'
+
+# ----- CONFIGURACIÓN DE CONTINUUM (auto-guardado) -----
+set -g @continuum-save-interval '15'  # Guarda cada 15 minutos
+set -g @continuum-restore 'on'        # Restaura automáticamente
+
+# ----- ATAJOS CORREGIDOS (usando rutas de ~/.config/tmux/) -----
+# Guardar sesión: Alt+q + s (de "save")
+bind s run '~/.config/tmux/plugins/tmux-resurrect/scripts/save.sh'
+
+# Restaurar sesión: Alt+q + r (de "restore")
+bind r run '~/.config/tmux/plugins/tmux-resurrect/scripts/restore.sh'
+
+# Guardar sesión (sin prefijo - opcional, con Ctrl+Shift+s)
+bind -n C-S-s run '~/.config/tmux/plugins/tmux-resurrect/scripts/save.sh'
+
+# Restaurar sesión (sin prefijo - opcional, con Ctrl+Shift+r)
+bind -n C-S-r run '~/.config/tmux/plugins/tmux-resurrect/scripts/restore.sh'
+
+# ----- INICIALIZAR TPM (SIEMPRE AL FINAL) -----
+run '~/.config/tmux/plugins/tpm/tpm'

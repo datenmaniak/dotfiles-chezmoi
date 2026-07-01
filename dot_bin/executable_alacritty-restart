@@ -1,0 +1,7 @@
+# 1. Actualiza alacritty.toml con los bindings arriba
+# 2. Actualiza tmux.conf
+# 3. Reinicia todo
+pkill alacritty
+tmux kill-server
+alacritty &
+

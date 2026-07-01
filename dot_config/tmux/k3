@@ -1,0 +1,11 @@
+cat > ~/.config/tmux/scripts/k3s-status.sh << 'EOF'
+#!/bin/bash
+# Muestra el estado de K3s
+if kubectl get nodes &>/dev/null 2>&1; then
+    NODES=$(kubectl get nodes --no-headers 2>/dev/null | wc -l)
+    echo "󰓓 K3s: $NODES"
+else
+    echo "󰓓 K3s: ⚠️"
+fi
+EOF
+

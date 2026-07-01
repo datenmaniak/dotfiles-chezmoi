@@ -1,0 +1,1 @@
+resolvectl status | grep -A10 "DNS Servers" 

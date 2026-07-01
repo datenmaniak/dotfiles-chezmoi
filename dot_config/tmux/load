@@ -1,0 +1,9 @@
+
+# Script de carga
+cat > ~/.config/tmux/scripts/load.sh << 'EOF'
+#!/bin/bash
+LOAD=$(uptime | awk '{print $10}' | sed 's/,//')
+echo "${LOAD:-0}%"
+EOF
+chmod +x ~/.config/tmux/scripts/load.sh
+

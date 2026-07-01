@@ -1,0 +1,92 @@
+ll
+chezmoi
+bbrew
+ujust --choose
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+ping google.com
+ip a
+which flatpak
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak install -y md.obsidian.Obsidian com.obsprojct.Studio org.videolan.VLC com.vivaldi.Vivaldi
+flatpak install com.vivaldi.Vivaldi
+which starship
+free -h
+[200~    rpm-ostree install alacritty tmux zsh  neovim gcc gnupg
+rpm-ostree search kitty
+rpm-ostree install alacritty tmux zsh  neovim gcc gnupg
+systemctl reboot
+ujust --choose
+rpm-ostree install alacritty tmux zsh  neovim gcc gnupg
+clear
+rpm-ostree install alacritty tmux zsh  neovim gcc gnupg
+ujust --choose
+which alacritty
+sudo usermod --shell /usr/bin/zsh $USER
+ll
+exit
+ll
+exit
+ll
+rpm-ostree status
+clear
+sudo dnf install ansible -y
+exit
+sudo dnf install alacritty kitty
+exit
+alacritty
+v
+sudo dnf install -y neovim alacritty
+which alacritty
+distrobox-export alacritty
+distrobox-export --app alacritty
+distrobox-export --bin /usr/bin/alacritty
+distrobox-export --help --app alacritty
+distrobox-export --delete --app alacritty
+exit
+distrobox-export --delete --bin alacritty
+distrobox-export --delete --bin /usr/sbin/alacritty 
+exit
+distrobox-export --delete --app kitty
+which kitty
+distrobox-export --delete --bin /usr/bin/kitty
+exit
+sudo dnf install cmake
+sudo dnf install gcc-c++ make
+exit
+ll
+ls
+ls -lpa
+ll ..
+cmake .. -DCMAKE_INSTALL_PREFIX=/usr
+make -j$(nproc)
+which cmake
+distrobox-export --bin /usr/bin/cmake
+exit
+which cpack
+distrobox-export --bin /usr/bin/cpack
+exit
+sudo dnf install -y gmp-ecm-devel
+rpm -q gpm-ecm-devel
+which gpm
+which ecm
+clear
+ll
+exit
+cmake .. -DCMAKE_INSTALL_PREFIX=/usr
+sudo dnf install extra-cmake-modules
+cmake .. -DCMAKE_INSTALL_PREFIX=/usr
+which qt6
+exit
+sudo dnf install qt6-base
+sudo dnf install qt6
+sudo dnf search qt6
+sudo dnf install qt6-qtbase
+sudo dnf install qf6-filesystem
+sudo dnf install kf6-filesystem
+cmake .. -DCMAKE_INSTALL_PREFIX=/usr
+history
+exit
+nmap
+sudo dnf install nmap -y
+nmap local-reg
+exit

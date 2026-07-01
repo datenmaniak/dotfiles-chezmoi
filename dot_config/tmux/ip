@@ -1,0 +1,9 @@
+
+
+# Script de IP
+cat > ~/.config/tmux/scripts/ip.sh << 'EOF'
+#!/bin/bash
+IP=$(hostname -I | awk '{print $1}')
+echo "${IP:-❌}"
+EOF
+chmod +x ~/.config/tmux/scripts/ip.sh

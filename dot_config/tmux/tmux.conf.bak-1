@@ -1,0 +1,58 @@
+# Cambiar el prefijo de Ctrl+b a Alt+q (más cómodo)
+unbind C-b
+set-option -g prefix M-q
+bind-key M-q send-prefix
+
+
+# Habilitar el ratón (útil al principio)
+# Activar el ratón por completo
+set -g mouse on
+
+# Mantener el modo copia al seleccionar con el ratón
+# (Evita que tmux salte al final de la pantalla al soltar el clic)
+unbind -T copy-mode-vi MouseDragEnd1Pane
+
+# Hacer que el scroll sea más rápido
+bind -n WheelUpPane if-shell -F -t = "#{mouse_any_flag}" "send-keys -M" "if -t= '#{pane_in_mode}' 'send-keys -M' 'copy-mode -e'"
+
+# Dividir paneles con h y v
+#bind h split-window -h
+#bind v split-window -v
+# Dividir paneles de forma clara e intuitiva
+bind | split-window -h   # Panel a la derecha (vertical)
+bind - split-window -v   # Panel abajo (horizontal)
+
+# Mejorar los colores
+set -g default-terminal "screen-256color"
+
+# AÑADE ESTO para que Tmux mantenga los colores verdaderos (True Color) de Alacritty:
+set -as terminal-features ",alacritty:RGB"
+
+# Mejorar respuesta (evita retrasos en la tecla ESC)
+set -s escape-time 50
+
+
+
+set -g repeat-time 600  # Te da más margen (milisegundos) para repetir la tecla
+
+
+
+bind-key -T copy-mode-vi v send -X begin-selection
+bind-key -T copy-mode-vi y send -X copy-selection-and-cancel
+
+
+# 8. DISEÑO DE LA BARRA DE ESTADO (Estilo Monokai Discreto)
+set -g status-style bg="#5c4e3e",fg="#f8f8f2"
+#set -g status-style bg="#343331",fg="#f8f8f2"
+set -g status-left "#[fg=#fc9867,bold] 🕋 [#S] "
+set -g status-right "#[fg=#a6e22e] 🌿 K3s/DevOps #[fg=#f4bf75] 🕒 %H:%M "
+setw -g window-status-current-style bg="#20a84b",fg="#563d32",bold
+setw -g window-status-current-format " #I:#W* "
+setw -g window-status-format " #I:#W  "
+
+
+
+# Mostrar directorio actual de cada ventana
+setw -g window-status-current-format " #[fg=#20a84b,bold]#I:#W#[fg=white] (#{pane_current_path}) "
+
+

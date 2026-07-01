@@ -28,3 +28,6 @@ unset rc
 export PATH="/var/home/willians/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 . "$HOME/.cargo/env"
+### bling.sh source start
+test -f /usr/share/ublue-os/bling/bling.sh && source /usr/share/ublue-os/bling/bling.sh
+### bling.sh source end

@@ -11,43 +11,16 @@ padding = { x = 8, y = 8 }
 x = 0
 y = 3 # Más espacio vertical para reducir la fatiga en lecturas largas
 
-[colors.primary]
-background = "#242424" # Fondo más profundo, elimina el lavado gris
-#background = "#1b1b1c" # Fondo más profundo, elimina el lavado gris
-#background = "#2f2c29" # Fondo más profundo, elimina el lavado gris
-foreground = "#c0bd9e" # Blanco de alta visibilidad, elimina lo opaco
-#foreground = "#e9e5e5" # Blanco de alta visibilidad, elimina lo opaco
-dim_foreground = "#94A3B8"
 
-[colors.normal]
-black   = "#1A1A1E"
-red     = "#EF4444" # Colores con más vida para identificarlos sin esfuerzo
-green   = "#22C55E"
-yellow  = "#EAB308"
-blue    = "#3B82F6"
-magenta = "#D946EF"
-cyan    = "#06B6D4"
-white   = "#F5F5F5"
-
-[colors.bright]
-black   = "#64748B"
-red     = "#F87171"
-green   = "#4ADE80"
-yellow  = "#FDE047"
-blue    = "#60A5FA"
-magenta = "#F472B6"
-cyan    = "#22D3EE"
-white   = "#FFFFFF"
-
-#import = ["~/configs-alacritty/alacritty.toml-obsidian-max-enfoque"]
 
 [font]
 # VictorMono para itálicas fluidas y JetBrains para legibilidad técnica
 normal = { family = "JetBrainsMono Nerd Font", style = "Medium" }
+#normal = { family = "VictorMono Nerd Font", style = "Bold" }
 bold = { family = "JetBrainsMono Nerd Font", style = "Bold" }
 italic = { family = "JetBrainsMono Nerd Font", style = "Italic" }
 #italic = { family = "VictorMono Nerd Font", style = "Italic" }
-size = 13 # Ajusta este valor según la pantalla para que no uses zoom
+size = 12 # Ajusta este valor según la pantalla para que no uses zoom
 
 
 [scrolling]
@@ -62,7 +35,23 @@ shell = { program = "/usr/bin/tmux", args = ["new-session", "-A", "-s", "main"] 
 
 [general]
 live_config_reload = true
-import = []
+import = [
+  #   "~/.config/alacritty/themes/themes/remedy_dark.toml"
+  #   "~/.config/alacritty/themes/themes/tokyo_night_storm.toml"
+  # "~/.config/alacritty/themes/themes/tomorrow_night_blue.toml"
+  # "~/.config/alacritty/themes/themes/moonlight_ii_vscode.toml"
+  "~/.config/alacritty/themes/themes/ubuntu.toml"
+  # "~/.config/alacritty/themes/themes/gotham.toml"
+  # "~/.config/alacritty/themes/themes/inferno.toml"
+  
+  #  light 
+  # "~/.config/alacritty/themes/themes/tokyo_night_light.toml"
+  #"~/.config/alacritty/themes/themes/modus_operandi.toml"
+  #"~/.config/alacritty/themes/themes/papertheme.toml"
+  #"~/.config/alacritty/themes/themes/tomorrow.toml"
+  #"~/.config/alacritty/themes/themes/rose_pine_moon.toml"
+]
+
 
 [env]
 TERM = "xterm-256color"
