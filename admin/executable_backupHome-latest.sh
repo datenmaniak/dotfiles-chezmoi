@@ -296,7 +296,8 @@ ejecutar_rsync() {
     fi
 
     # Incorporación estricta de tus argumentos solicitados: -aHXh --delete --stats
-    local args=(-aHXh --delete --stats)
+    #local args=(-aHXh --delete --stats)
+    local args=(-aHXh --stats)
     args+=("${FILTROS[@]}")
 
     if [ -n "$DRY_RUN" ]; then

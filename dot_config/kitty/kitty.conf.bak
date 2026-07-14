@@ -1,7 +1,7 @@
 # vim:fileencoding=utf-8:foldmethod=marker
 
 # BEGIN_KITTY_FONTS
-font_family      family='UbuntuSansMono Nerd Font' postscript_name=UbuntuSansMonoNF-Regular
+font_family      family="UbuntuSansMono Nerd Font"
 bold_font        auto
 italic_font      auto
 bold_italic_font auto
@@ -3274,6 +3274,6 @@ font_size 13.0
 
 
 # BEGIN_KITTY_THEME
-# Adventure Time
+# Atelier Sulphurpool Dark
 include current-theme.conf
 # END_KITTY_THEME

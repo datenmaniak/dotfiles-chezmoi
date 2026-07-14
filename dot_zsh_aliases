@@ -116,11 +116,11 @@ alias gco='git checkout'
 # ----------------------------------------
 alias k='kubectl'
 alias m='minikube'
-alias kget='kubectl get'
-alias kdes='kubectl describe'
-alias kgno='kubectl get nodes'
-alias k8s-homelab='set-k8s homelab'
-alias k8s-local='set-k8s local'
+alias k-get='kubectl get'
+alias k-describe="kubectl describe"
+alias k-apply="kubectl apply"
+alias k-delete="kubectl delete"
+alias k-log="kubectl log"
 
 # ----------------------------------------
 # HISTORIAL (lo que pediste)

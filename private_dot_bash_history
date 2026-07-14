@@ -90,3 +90,23 @@ nmap
 sudo dnf install nmap -y
 nmap local-reg
 exit
+sudo dnf install writer
+dnf seach writer | grep fedora
+dnf search writer | grep fedora
+dnf search writer
+dnf search write | grep fedora
+dnf search writer
+sudo dnf install mediawriter
+sudo dnf search libreoffice 
+sudo dnf install -y  libreoffice-langpack-es  libreoffice-writer 
+distrobox-export libreoffice-writer
+distrobox-export --app libreoffice-writer
+which libreoffice
+which libreoffice-
+distrobox-export --app libreoffice
+gparted
+sudo dnf install -y gparted
+distrobox-export --app gparted
+sudo dnf install -y gparted
+gparted
+exit
