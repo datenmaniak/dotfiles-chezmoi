@@ -110,3 +110,18 @@ distrobox-export --app gparted
 sudo dnf install -y gparted
 gparted
 exit
+nmap ai-agent
+exit
+nmap fw
+exit
+cd
+vgscan
+sudo vgscan
+sudo dnf install lvm2
+sudo apt update
+sudo dnf update
+vgscan
+sudo dnf install lvm2
+sudo dnf install lvm
+clear
+exit
