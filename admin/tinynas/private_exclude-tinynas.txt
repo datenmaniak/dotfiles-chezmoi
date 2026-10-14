@@ -1,0 +1,53 @@
+# Exclusiones comunes para el respaldo hacia /mnt/tinynas
+# Un patrón por línea. Sintaxis de rsync (--exclude-from).
+
+# --- Imágenes de disco ---
+*.img
+*.iso
+*.vmdk
+*.qcow2
+*.vdi
+*.vhd
+
+# --- Archivos temporales y parciales ---
+*.tmp
+*.temp
+*~
+*.part
+*.crdownload
+*.swp
+*.swo
+
+# --- Papeleras y reciclajes ---
+.Trash-*
+.Trash/
+#recycle/
+$RECYCLE.BIN/
+System Volume Information/
+
+# --- Basura de filesystems ---
+lost+found/
+
+# --- Metadatos de NAS / Synology-like ---
+@eaDir/
+
+# --- Cachés de usuario ---
+.cache/
+Cache/
+.cargo/registry/
+.gradle/caches/
+.npm/_cacache/
+.thumbnails/
+.local/share/
+.config/vivaldi/
+
+
+# --- instalación de Rust gestionada por rustup
+.rustup/
+.cargo/
+
+
+# --- Específicos de /etc ---
+mtab
+resolv.conf
+etc/

@@ -1,0 +1,18 @@
+[Unit]
+Description=Respaldo horario (cada 3h) de home de y /etc hacia /mnt/tinynas
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/datenmaniak
+ExecStart=/home/datenmaniak/admin/tinynas/backup-tinynas.sh
+TimeoutStartSec=2h
+Nice=10
+IOSchedulingClass=best-effort
+IOSchedulingPriority=6
+
+# Log: el script ya escribe en /home/wpp/backup.log.
+# systemd además captura stdout/stderr en journal.
+StandardOutput=journal
+StandardError=journal

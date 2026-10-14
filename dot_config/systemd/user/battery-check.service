@@ -4,3 +4,6 @@ Description=Battery check and shutdown below 10%
 [Service]
 Type=oneshot
 ExecStart=%h/00-10_scripts/01.01_watch-battery/check-battery-shutdown.sh
+
+[Install]
+WantedBy=default.target

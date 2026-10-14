@@ -1,0 +1,12 @@
+[Unit]
+Description=Timer cada 3 horas para backup-tinynas.service
+
+[Timer]
+OnCalendar=*-*-* 00/3:00:00
+Persistent=true
+RandomizedDelaySec=5min
+AccuracySec=1min
+Unit=backup-tinynas.service
+
+[Install]
+WantedBy=timers.target
