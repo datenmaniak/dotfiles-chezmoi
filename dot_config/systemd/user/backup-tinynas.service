@@ -6,9 +6,10 @@ Wants=network-online.target
 [Service]
 Type=oneshot
 WorkingDirectory=/home/datenmaniak
-ExecStart=/home/datenmaniak/admin/tinynas/backup-tinynas.sh
-TimeoutStartSec=2h
-Nice=10
+ExecStart=-/home/datenmaniak/admin/tinynas/backup-iteractivo-dirsfiles-tinynas.sh
+ExecStart=-/home/datenmaniak/admin/tinynas/backup-iteractivo-etc-dirsfiles-tinynas.sh
+TimeoutStartSec=15min
+Nice=8
 IOSchedulingClass=best-effort
 IOSchedulingPriority=6
 
@@ -19,4 +20,3 @@ StandardError=journal
 
 [Install]
 WantedBy=default.target
-

@@ -1,0 +1,3 @@
+sudo systemctl daemon-reload && sudo mount -a 
+echo "-- Tiny NAS"
+ls -la /var/mnt/tinynas/
